@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --secondary-bg-color: #0e0e0e;
+  --lightdark-color: #80808018;
+  --border-color: #f5f5f51a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100dvh;
+  width: 100dvw;
+  margin: 0;
+  padding: 0;
+  background-color: #060707;
+  color: #e8e8e8;
+  font-family: "Karla", "Outfit", ui-sans-serif, system-ui, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+}
+
+.borderless-input {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.borderless-input:focus {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.borderless-input:focus-visible {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.navbar-search {
+  width: 350px;
+  padding-block: 15px !important;
+}
+
+.dark-button {
+  color: white;
+  border: 1px solid rgba(104, 103, 103, 0.27);
+  transition: background-color 0.2s ease;
+}
+
+.dark-button:hover {
+  background-color: #00000010;
+}
