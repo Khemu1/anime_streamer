@@ -15,7 +15,7 @@ import { Icon } from "@iconify/vue";
 </script>
 
 <template>
-  <Drawer direction="right">
+  <Drawer direction="right" class="!border-none">
     <DrawerTrigger>
       <Button
         class="bg-lightDark hover:bg-lightDark border border-borderColor h-full rounded-sm"
@@ -28,7 +28,8 @@ import { Icon } from "@iconify/vue";
         />
       </Button>
     </DrawerTrigger>
-    <DrawerContent>
+
+    <DrawerContent class="h-full ml-auto w-[400px]">
       <DrawerHeader>
         <DrawerTitle>
           <div class="flex justify-between items-center">
@@ -55,17 +56,26 @@ import { Icon } from "@iconify/vue";
                 />
                 Mark all as Read
               </Button>
+              <DrawerClose>
+                <Button
+                  class="bg-transparent text-white hover:bg-red-600 border border-borderColor rounded-full p-1 h-[30px] w-[30px]"
+                >
+                  <Icon
+                    icon="ic:round-close"
+                    width="20px"
+                    height="20px"
+                    style="color: #ffffff"
+                  />
+                </Button>
+              </DrawerClose>
             </div>
           </div>
         </DrawerTitle>
-        <DrawerDescription>This action cannot be undone.</DrawerDescription>
+
+        <DrawerDescription class="text-sm text-gray-400 mt-2">
+          This action cannot be undone.
+        </DrawerDescription>
       </DrawerHeader>
-      <!-- <DrawerFooter>
-        <Button>Submit</Button>
-        <DrawerClose>
-          <Button variant="outline">Cancel</Button>
-        </DrawerClose>
-      </DrawerFooter> -->
     </DrawerContent>
   </Drawer>
 </template>

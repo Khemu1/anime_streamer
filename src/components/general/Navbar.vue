@@ -30,7 +30,7 @@ const handleSearchBarToggle = () => {
         to="/"
         class="flex items-center text-white font-extrabold uppercase"
       >
-        Max Streamer
+        AnimeVault
       </router-link>
 
       <!-- large screen Search Form -->

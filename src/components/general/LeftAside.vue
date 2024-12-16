@@ -14,8 +14,8 @@ const route = useRoute();
       v-for="(button, index) in buttons"
       :key="index"
       :to="button.route"
-      class="flex flex-col items-center justify-center mb-4 py-2 w-full group hover:bg-gray-400/10 transition-all"
-      :class="[route.path === button.route ? 'bg-gray-400/10' : '']"
+      class="relative flex flex-col items-center justify-center py-2 w-full group hover:bg-gray-400/10 transition-all"
+      :class="[route.path === button.route ? 'bg-gray-400/10  ' : '']"
     >
       <Icon
         :icon="button.icon"
@@ -30,6 +30,10 @@ const route = useRoute();
       >
         {{ button.name }}
       </span>
+      <span
+        v-if="route.path === button.route"
+        class="absolute top-0 right-[-1px] h-full bg-red-600 rounded-full w-[.5px]"
+      ></span>
     </router-link>
   </aside>
 </template>
