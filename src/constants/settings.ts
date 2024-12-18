@@ -1,4 +1,6 @@
-export const appearance = [
+import { settingOptions, SettingsKey } from "@/types/settings";
+
+export const appearance: settingOptions[] = [
   {
     name: "Primary Accent Color",
     desc: "Select the primary accent color for the UI.",
@@ -10,41 +12,41 @@ export const appearance = [
       "Sea Green",
       "Hot Pink",
     ],
-    selectedValue: "Miruro",
+    id: "primaryAccent",
   },
   {
     name: "Continue Watching on Home Page",
     desc: "Choose whether to go to the info page or watch page when selecting an anime.",
     values: ["Show", "Hide"],
-    selectedValue: "Show",
+    id: "continueWatchingOnHome",
   },
   {
     name: "Card Layout",
     desc: "Select the layout for the anime cards.",
-    values: ["Clasic", "AniChart", "Card List"],
-    selectedValue: "Clasic",
+    values: ["Classic", "AniChart", "Card List"],
+    id: "cardLayout",
   },
   {
     name: "Card Size",
     desc: "Choose between large or medium card sizes in classic layout.",
     values: ["Medium", "Large"],
-    selectedValue: "Medium",
+    id: "cardSize",
   },
   {
     name: "Episode List Layout",
     desc: "Set the default layout for episode lists.",
     values: ["Classic", "Grid", "Image List"],
-    selectedValue: "Classic",
+    id: "episodeLayout",
   },
   {
     name: "Navbar Style (mobile)",
     desc: "Set the default navbar look.",
     values: ["Float", "Dock"],
-    selectedValue: "Float",
+    id: "navbarStyle",
   },
 ];
 
-export const displayLanguage = [
+export const displayLanguage: settingOptions[] = [
   {
     name: "Title Language",
     desc: "Choose the language format for titles.",
@@ -53,62 +55,80 @@ export const displayLanguage = [
       "Romaji (Shingeki no Kyojin)",
       "Native (進撃の巨人)",
     ],
-    selectedValue: "English (Attack on Titan)",
+    id: "titleLanguage",
   },
   {
     name: "Character Name Language",
     desc: "Select the language format for character names.",
     values: ["Romaji (Shingeki no Kyojin)", "Native (キルア=ゾルディック)"],
-    selectedValue: "Romaji (Shingeki no Kyojin)",
+    id: "characterNameLanguage",
   },
 ];
 
-export const comments = [
+export const comments: settingOptions[] = [
   {
     name: "Show comments",
     desc: "Choose whether to show comments by default.",
     values: ["Enabled", "Disabled"],
-    selectedValue: "Enabled",
+    id: "showComments",
   },
 ];
 
-export const mediaSettings = [
+export const mediaSettings: settingOptions[] = [
   {
     name: "Default Language",
     desc: "Set the default language for media playback.",
     values: ["Subtitles", "Debugging"],
-    selectedValue: "Subtitles",
-    storaggeKey: "defaultLanguage",
+    id: "defaultLanguage",
   },
   {
     name: "Default Provider",
     desc: "Set your preferred media provider.",
     values: ["zoro", "gogo", "vid"],
-    selectedValue: "zoro",
-
+    id: "defaultProvider",
   },
   {
     name: "Force Maximum Quality",
     desc: "Force the player to maintain the maximum quality during playback. Enable this setting if you are experiencing sudden quality drops.",
     values: ["Enabled", "Disabled"],
-    selectedValue: "Enabled",
+    id: "forceMaxQuality",
   },
   {
     name: "Auto Skip Intro/Outro",
     desc: "Automatically skip intros and outros.",
     values: ["Enabled", "Disabled"],
-    selectedValue: "Enabled", 
+    id: "autoSkipIntroOutro",
   },
   {
     name: "Auto Play",
     desc: "Enable auto play for media.",
     values: ["Enabled", "Disabled"],
-    selectedValue: "Enabled",
+    id: "autoPlay",
   },
   {
     name: "Auto Next Episode",
     desc: "Automatically advance to the next episode when the current one ends.",
     values: ["Enabled", "Disabled"],
-    selectedValue: "Enabled",
+    id: "autoNextEpisode",
   },
 ];
+
+export const defaultSettings: {
+  [key in SettingsKey]: string;
+} = {
+  primaryAccent: "Miruro",
+  continueWatchingOnHome: "Show",
+  cardLayout: "Classic",
+  cardSize: "Medium",
+  episodeLayout: "Classic",
+  navbarStyle: "Float",
+  titleLanguage: "English (Attack on Titan)",
+  characterNameLanguage: "Romaji (Shingeki no Kyojin)",
+  showComments: "Enabled",
+  defaultLanguage: "Subtitles",
+  defaultProvider: "zoro",
+  forceMaxQuality: "Enabled",
+  autoNextEpisode: "Enabled",
+  autoPlay: "Enabled",
+  autoSkipIntroOutro: "Enabled",
+};

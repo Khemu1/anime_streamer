@@ -1,36 +1,15 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
-import { useLocalStorage } from "@vueuse/core";
 
 import {
   appearance,
   displayLanguage,
   comments,
-  mediaSettings as _mediaSettings,
-} from "../constants/profile";
-
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  mediaSettings,
+} from "../constants/settings";
 import { Button } from "@/components/ui/button";
+import SettingsSection from "@/components/profile/SettingsSection.vue";
 
-const appearanceSettings = useLocalStorage("appearanceSettings", appearance, {
-  deep: true,
-});
-const languageSettings = useLocalStorage("languageSettings", displayLanguage, {
-  deep: true,
-});
-const commentSettings = useLocalStorage("commentSettings", comments, {
-  deep: true,
-});
-const mediaSettings = useLocalStorage("mediaSettings", _mediaSettings, {
-  deep: true,
-});
 </script>
 
 <template>
@@ -38,191 +17,28 @@ const mediaSettings = useLocalStorage("mediaSettings", _mediaSettings, {
     <div
       class="flex flex-col gap-5 w-full sm:w-[75%] bg-secondaryBg rounded-lg sm:my-10 p-5"
     >
-      <!-- Appearance Section -->
-      <section class="border-b-2 border-b-[#80808018] py-1 px-3">
-        <div class="flex gap-2">
-          <Icon
-            icon="dashicons:admin-appearance"
-            width="30px"
-            height="30px"
-            style="color: #ffffff"
-          />
-
-          <h2 class="text-2xl font-bold mb-4">Appearance</h2>
-        </div>
-        <div
-          v-for="(item, index) in appearanceSettings"
-          :key="index"
-          class="flex flex-col gap-4 mb-4"
-        >
-          <div
-            class="flex flex-col sm:flex-row justify-between gap-4 sm:items-center flex-wrap"
-          >
-            <div class="flex flex-col gap-2">
-              <label class="block font-semibold text-[18px] text-gray-200">
-                {{ item.name }}
-              </label>
-              <p class="text-[gray] text-sm mb-2 w-[350px]">
-                {{ item.desc }}
-              </p>
-            </div>
-            <Select v-model="item.selectedValue">
-              <SelectTrigger class="w-[200px]">
-                <SelectValue placeholder="Select an option" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup class="w-[200px]">
-                  <SelectItem
-                    v-for="(value, idx) in item.values"
-                    :key="idx"
-                    :value="value"
-                    class=""
-                  >
-                    {{ value }}
-                  </SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
-        </div>
-      </section>
-
-      <!-- Language Section -->
-      <section class="border-b-2 border-b-[#80808018] py-1 px-3">
-        <div class="flex gap-2">
-          <Icon
-            icon="material-symbols-light:language"
-            width="30px"
-            height="30px"
-            style="color: #ffffff"
-          />
-          <h2 class="text-2xl font-bold mb-4">Display Language</h2>
-        </div>
-        <div
-          v-for="(item, index) in languageSettings"
-          :key="index"
-          class="mb-6"
-        >
-          <div
-            class="flex flex-col sm:flex-row justify-between gap-4 sm:items-center flex-wrap"
-          >
-            <div class="flex flex-col gap-2">
-              <label class="block font-semibold text-[18px] text-gray-200">
-                {{ item.name }}
-              </label>
-              <p class="text-[gray] text-sm mb-2 w-[350px]">
-                {{ item.desc }}
-              </p>
-            </div>
-            <Select class="w-[224px]" v-model="item.selectedValue">
-              <Select v-model="item.selectedValue">
-                <SelectTrigger class="w-[200px]">
-                  <SelectValue placeholder="Select an option" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup class="w-[200px]">
-                    <SelectItem
-                      v-for="(value, idx) in item.values"
-                      :key="idx"
-                      :value="value"
-                      class=""
-                    >
-                      {{ value }}
-                    </SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </Select>
-          </div>
-        </div>
-      </section>
-
-      <!-- Comments Section -->
-      <section class="border-b-2 border-b-[#80808018] py-1 px-3">
-        <h2 class="text-2xl font-bold mb-4">💬 Comments</h2>
-        <div v-for="(item, index) in commentSettings" :key="index" class="mb-6">
-          <div
-            class="flex flex-col sm:flex-row justify-between gap-4 sm:items-center flex-wrap"
-          >
-            <div class="flex flex-col gap-2">
-              <label class="block font-semibold text-[18px] text-gray-200">
-                {{ item.name }}
-              </label>
-              <p class="text-[gray] text-sm mb-2 w-[350px]">
-                {{ item.desc }}
-              </p>
-            </div>
-            <Select class="w-[224px]" v-model="item.selectedValue">
-              <Select v-model="item.selectedValue">
-                <SelectTrigger class="w-[200px]">
-                  <SelectValue placeholder="Select an option" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup class="w-[200px]">
-                    <SelectItem
-                      v-for="(value, idx) in item.values"
-                      :key="idx"
-                      :value="value"
-                      class=""
-                    >
-                      {{ value }}
-                    </SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </Select>
-          </div>
-        </div>
-      </section>
-
-      <!-- Media Settings -->
-      <section class="border-b-2 border-b-[#80808018] py-1 px-3">
-        <div class="flex gap-2">
-          <Icon
-            icon="tdesign:media-library-filled"
-            width="30px"
-            height="30px"
-            style="color: #ffffff"
-          />
-          <h2 class="text-2xl font-bold mb-4">Media Settings</h2>
-        </div>
-        <div v-for="(item, index) in mediaSettings" :key="index" class="mb-6">
-          <div
-            class="flex flex-col sm:flex-row justify-between gap-4 sm:items-center flex-wrap"
-          >
-            <div class="flex flex-col gap-2">
-              <label class="block font-semibold text-[18px] text-gray-200">
-                {{ item.name }}
-              </label>
-              <p class="text-[gray] text-sm mb-2 w-[350px]">
-                {{ item.desc }}
-              </p>
-            </div>
-            <Select class="w-[10px]" v-model="item.selectedValue">
-              <Select v-model="item.selectedValue">
-                <SelectTrigger class="w-[200px]">
-                  <SelectValue placeholder="Select an option" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup class="w-[200px]">
-                    <SelectItem
-                      v-for="(value, idx) in item.values"
-                      :key="idx"
-                      :value="value"
-                      class=""
-                    >
-                      {{ value }}
-                    </SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </Select>
-          </div>
-        </div>
-      </section>
+      <SettingsSection
+        title="Appearance"
+        icon="dashicons:admin-appearance"
+        :settings="appearance"
+      />
+      <SettingsSection
+        title="Display Language"
+        icon="material-symbols-light:language"
+        :settings="displayLanguage"
+      />
+      <SettingsSection
+        title="Comments"
+        icon="mdi:comment-text-multiple"
+        :settings="comments"
+      />
+      <SettingsSection
+        title="Media Settings"
+        icon="tdesign:media-library-filled"
+        :settings="mediaSettings"
+      />
 
       <!-- Other Settings -->
-
       <section class="py-1 px-3">
         <div class="flex gap-2">
           <Icon

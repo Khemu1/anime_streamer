@@ -6,6 +6,11 @@ const routes = [
     name: "profileSettings",
     component: () => import("../views/Settings.vue"),
   },
+  {
+    path: "/trending",
+    name: "trending",
+    component: () => import("../views/Trending.vue"),
+  },
 ];
 
 export const router = createRouter({

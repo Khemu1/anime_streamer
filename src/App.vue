@@ -2,6 +2,9 @@
 import Navbar from "@/components/general/Navbar.vue";
 import Footer from "@/components/general/Footer.vue";
 import LeftAside from "@/components/general/LeftAside.vue";
+import { useUserStore } from "@/store/user";
+
+useUserStore();
 </script>
 
 <template>

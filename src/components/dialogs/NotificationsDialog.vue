@@ -4,7 +4,6 @@ import {
   DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -29,7 +28,7 @@ import { Icon } from "@iconify/vue";
       </Button>
     </DrawerTrigger>
 
-    <DrawerContent class="h-full ml-auto w-[400px]">
+    <DrawerContent class="h-full ml-auto w-[400px] !border-none">
       <DrawerHeader>
         <DrawerTitle>
           <div class="flex justify-between items-center">

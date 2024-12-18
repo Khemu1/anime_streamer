@@ -23,6 +23,131 @@ body {
     Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
 }
 
+/** Primary Accent Colors */
+
+/* In your global CSS file (e.g., styles.css or a similar file) */
+
+.miruro {
+  @apply text-[#ff6347]  !important; /* Tomato red */
+}
+
+.tomato {
+  @apply text-[#ff5733] !important; /* Orange-red */
+}
+
+.royal-blue {
+  @apply text-[#4169e1]   !important; /* Royal blue */
+}
+
+.orange {
+  @apply text-[#ffa500] !important; /* Orange */
+}
+
+.sea-green {
+  @apply text-[#2e8b57]  !important; /* Sea green */
+}
+
+.hot-pink {
+  @apply text-[#ff69b4]  !important; /* Hot pink */
+}
+
+.miruro-hover {
+  @apply group-hover:text-[#ff6347] hover:text-[#ff6347]  transition-all !important; /* Tomato red */
+}
+
+.tomato-hover {
+  @apply group-hover:text-[#ff5733] hover:text-[#ff5733]  transition-all !important; /* Orange-red */
+}
+
+.royal-blue-hover {
+  @apply group-hover:text-[#4169e1] hover:text-[#4169e1]  transition-all !important; /* Royal blue */
+}
+
+.orange-hover {
+  @apply group-hover:text-[#ffa500] hover:text-[#ffa500]  transition-all !important; /* Orange */
+}
+
+.sea-green-hover {
+  @apply group-hover:text-[#2e8b57] hover:text-[#2e8b57]  transition-all !important; /* Sea green */
+}
+
+.hot-pink-hover {
+  @apply group-hover:text-[#ff69b4] hover:text-[#ff69b4]  transition-all !important; /* Hot pink */
+}
+
+/* Add right border colors */
+.miruro-border {
+  @apply border-r-2 border-[#ff6347] !important; /* Tomato red */
+}
+
+.tomato-border {
+  @apply border-r-2 border-[#ff5733] !important; /* Orange-red */
+}
+
+.royal-blue-border {
+  @apply border-r-2 border-[#4169e1] !important; /* Royal blue */
+}
+
+.orange-border {
+  @apply border-r-2 border-[#ffa500] !important; /* Orange */
+}
+
+.sea-green-border {
+  @apply border-r-2 border-[#2e8b57] !important; /* Sea green */
+}
+
+.hot-pink-border {
+  @apply border-r-2 border-[#ff69b4]  !important; /* Hot pink */
+}
+
+.miruro-border-hover {
+  @apply hover:border-[#ff6347] transition-all !important; /* Tomato red */
+}
+
+.tomato-border-hover {
+  @apply hover:border-[#ff5733] transition-all !important; /* Orange-red */
+}
+
+.royal-blue-border-hover {
+  @apply hover:border-[#4169e1] transition-all !important; /* Royal blue */
+}
+
+.orange-border-hover {
+  @apply hover:border-[#ffa500] transition-all !important; /* Orange */
+}
+
+.sea-green-border-hover {
+  @apply hover:border-[#2e8b57] transition-all !important; /* Sea green */
+}
+
+.hot-pink-border-hover {
+  @apply hover:border-[#ff69b4] transition-all !important; /* Hot pink */
+}
+
+.miruro-bg {
+  @apply bg-[#ff6347] !important; /* Tomato red */
+}
+
+.tomato-bg {
+  @apply bg-[#ff5733] !important; /* Orange-red */
+}
+
+.royal-blue-bg {
+  @apply bg-[#4169e1] !important; /* Royal blue */
+}
+
+.orange-bg {
+  @apply bg-[#ffa500] !important; /* Orange */
+}
+
+.sea-green-bg {
+  @apply bg-[#2e8b57] !important; /* Sea green */
+}
+
+.hot-pink-bg {
+  @apply bg-[#ff69b4] !important; /* Hot pink */
+}
+
 .borderless-input {
   border: none !important;
   outline: none !important;
@@ -53,4 +178,25 @@ body {
 
 .dark-button:hover {
   background-color: #00000010;
+}
+
+/* Hide scrollbars for better aesthetics */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, and Opera */
+}
+
+/* Make scrollbars thin and invisible */
+.thin-scrollbar {
+  scrollbar-width: thin; /* Firefox: Makes scrollbar thinner */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.thin-scrollbar::-webkit-scrollbar {
+  width: 0px; /* Chrome, Safari, Opera: Makes scrollbar invisible */
+  height: 0px; /* For horizontal scrollbars */
 }
