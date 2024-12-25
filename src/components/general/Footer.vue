@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const publicUrl = import.meta.env.Public_URL as string;
+const publicUrl = import.meta.env.VITE_PUBLIC_URL as string;
+console.log("asdasuudjghsjudkgasd", publicUrl);
 </script>
 
 <template>
@@ -9,11 +10,7 @@ const publicUrl = import.meta.env.Public_URL as string;
         <div
           class="w-[70px] h-[70px] transition-all focus:scale-110 active:scale-95 active:opacity-70 rounded-md overflow-hidden"
         >
-          <img
-            src="/public/05.jpg"
-            alt="logo"
-            class="object-fit w-full h-full"
-          />
+          <img src="/05.jpg" alt="logo" class="object-fit w-full h-full" />
         </div>
         <p class="text-[12px] text-gray-300/30">
           This website does not retain any files on its server. Rather, it
@@ -39,9 +36,8 @@ const publicUrl = import.meta.env.Public_URL as string;
     <div class="font-semibold text-[11px]">
       <span class="font-semibold mr-1">&copy;</span>
       <span class="mr-1">{{ new Date().getFullYear() }}</span>
-      <router-link to="{{publicUrl}}" class="underline">
-        Animevault.com
-      </router-link>
+      <router-link to="/" class="underline">Animevault.com</router-link>
+      <
     </div>
   </footer>
 </template>

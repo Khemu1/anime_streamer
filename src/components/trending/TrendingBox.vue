@@ -2,7 +2,8 @@
 import { useElementHover } from "@vueuse/core";
 import { Icon } from "@iconify/vue";
 import { onMounted, onUnmounted, ref } from "vue";
-import { getPrimaryAccentClass, useUserStore } from "@/store/user";
+import { useUserStore } from "@/store/user";
+import { getPrimaryAccentClass } from "@/utils/localSettings";
 import { formatNumber } from "@/utils/trending";
 
 const imageHover = ref();
@@ -84,15 +85,15 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="flex flex-col bg-lightDark p-4 rounded-md shadow-lg overflow-hidden cursor-pointer"
+    class="flex flex-col bg-lightDark p-4 rounded-md shadow-lg overflow-hidden cursor-pointer sm:w-[auto]"
   >
     <div class="flex gap-4">
       <div
-        class="w-1/3 h-[222px] rounded-md overflow-hidden relative cursor-pointer group"
+        class="flex-shrink-0 w-1/3 h-[222px] rounded-md overflow-hidden relative cursor-pointer group"
         ref="imageHover"
       >
         <img
-          src="/home/khemu/anime_streamer/public/ezgif.com-animated-gif-maker_2.gif"
+          src="/ezgif.com-animated-gif-maker_2.gif"
           class="w-full h-full object-fit transition-all duration-300 ease-in-out group-hover:opacity-70 group-hover:translate-y-[-4px]"
           alt="Preview of DAN DA DAN"
         />
@@ -105,10 +106,22 @@ onUnmounted(() => {
         />
       </div>
 
-      <div class="flex flex-col flex-1">
+      <div class="flex flex-col flex-1 overflow-hidden">
         <div>
-          <h3 class="text-lg font-bold text-white">DAN DA DAN</h3>
-          <h4 class="text-sm text-gray-400 mb-2">Dandadan</h4>
+          <h3
+            class="text-lg font-bold overflow-hidden text-white text-ellipsis whitespace-nowrap flex-grow-0"
+          >
+            DAN DA DAN DAN DA DAN DAN DA DAN DAN DA DAN DAN DA DAN DAN DA DAN
+            ddddddddddddddddd
+          </h3>
+          <h4
+            class="text-sm text-gray-400 mb-2 overflow-hidden text-ellipsis whitespace-nowrap block"
+          >
+            Dandadan Dandadan Dandadan Dandadan Dandadan Dandadan Dandadan
+            Dandadan Dandadan Dandadan Dandadan Dandadan Dandadan Dandadan
+            Dandadan Dandadan Dandadan Dandadan Dandadan Dandadan Dandadan
+            Dandadan Dandadan Dandadan Dandadan Dandadan Dandadan Dandadan
+          </h4>
           <p
             class="text-[12px] text-gray-300/50 overflow-y-auto pr-2 max-h-[150px] scrollbar-hide"
           >
@@ -124,7 +137,33 @@ onUnmounted(() => {
             activities that transcend comprehension. Amid these predicaments,
             Momo awakens her hidden power and Okarun gains the power of a curse
             to overcome these new dangers! Their fateful love begins as well!?
-            The story of the occult battle and adolescence starts!
+            The story of the occult battle and adolescence starts! This is a
+            story about Momo, a high school girl who comes from a family of
+            spirit mediums, and her classmate Okarun, an occult fanatic. After
+            Momo rescues Okarun from being bullied, they begin talking. However,
+            an argument ensues between them since Momo believes in ghosts but
+            denies aliens exist, and Okarun believes in aliens but denies ghosts
+            exist. To prove to each other what they believe in is real, Momo
+            goes to an abandoned hospital where a UFO has been spotted and
+            Okarun goes to a tunnel rumored to be haunted. To their surprise,
+            they each encounter overwhelming paranormal activities that
+            transcend comprehension. Amid these predicaments, Momo awakens her
+            hidden power and Okarun gains the power of a curse to overcome these
+            new dangers! Their fateful love begins as well!? The story of the
+            occult battle and adolescence starts! This is a story about Momo, a
+            high school girl who comes from a family of spirit mediums, and her
+            classmate Okarun, an occult fanatic. After Momo rescues Okarun from
+            being bullied, they begin talking. However, an argument ensues
+            between them since Momo believes in ghosts but denies aliens exist,
+            and Okarun believes in aliens but denies ghosts exist. To prove to
+            each other what they believe in is real, Momo goes to an abandoned
+            hospital where a UFO has been spotted and Okarun goes to a tunnel
+            rumored to be haunted. To their surprise, they each encounter
+            overwhelming paranormal activities that transcend comprehension.
+            Amid these predicaments, Momo awakens her hidden power and Okarun
+            gains the power of a curse to overcome these new dangers! Their
+            fateful love begins as well!? The story of the occult battle and
+            adolescence starts!
           </p>
         </div>
         <div

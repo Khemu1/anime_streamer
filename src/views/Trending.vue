@@ -14,7 +14,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { ref } from "vue";
 
-const items = [1, 2, 3, 4, 5, 6, , 8, 9];
 
 const season = ref("Winter");
 </script>
@@ -45,9 +44,8 @@ const season = ref("Winter");
       </div>
     </header>
 
-    <!-- Section content -->
     <section
-      class="mt-6 grid grid-cols-[repeat(auto-fill,_minmax(545px,_1fr))] gap-5"
+      class="mt-6 grid grid-cols-[repeat(auto-fill,_minmax(auto,_1fr))] sm:grid-cols-[repeat(auto-fill,_minmax(545px,_1fr))] gap-5"
     >
       <TrendingBox />
       <TrendingBox />

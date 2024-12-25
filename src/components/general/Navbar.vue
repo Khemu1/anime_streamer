@@ -5,6 +5,13 @@ import { useFocus } from "@vueuse/core";
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
 import { Icon } from "@iconify/vue";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
 import NotificationsDialog from "@/components/dialogs/NotificationsDialog.vue";
 
 const searchText = ref<string>("");
@@ -23,7 +30,7 @@ const handleSearchBarToggle = () => {
 
 <template>
   <nav
-    class="flex flex-col gap-2 sm:flex-row w-full p-2.5 bg-secondaryBg border-b border-borderColor items-center justify-between px-2"
+    class="fixed z-[999] top-0 flex flex-col gap-3 sm:flex-row w-full p-2.5 bg-secondaryBg border-b border-borderColor items-center justify-between px-2"
   >
     <div class="w-full flex items-center justify-between">
       <router-link
@@ -71,6 +78,16 @@ const handleSearchBarToggle = () => {
             height="15px"
           />
         </Button>
+        <Button
+          class="bg-lightDark hover:bg-lightDark border border-borderColor !rounded-sm flex-1 h-[auto]"
+        >
+          <Icon
+            icon="hugeicons:shuffle"
+            style="color: #ffffff"
+            width="15px"
+            height="15px"
+          />
+        </Button>
       </form>
 
       <!-- Drawer Button -->
@@ -87,11 +104,54 @@ const handleSearchBarToggle = () => {
           />
         </Button>
         <NotificationsDialog />
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            class="sm:hidden flex justify-center items-center !border !border-borderColor bg-lightDark w-[50px] rounded"
+          >
+            <Icon
+              icon="tabler:user"
+              width="20px"
+              height="20px"
+              class="transition-all"
+            />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent class="border-borderColor rounded-sm">
+            <DropdownMenuItem>
+              <router-link to="/profile" class="flex items-center gap-2 w-full">
+                <Icon
+                  icon="solar:user-bold"
+                  width="20px"
+                  height="20px"
+                  style="color: #ffffff"
+                />
+                <span>Profile</span>
+              </router-link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <router-link
+                to="/settings"
+                class="flex items-center gap-2 w-full"
+              >
+                <Icon
+                  icon="material-symbols:settings-outline"
+                  width="20px"
+                  height="20px"
+                  style="color: #ffffff"
+                />
+                <span>Settings</span>
+              </router-link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
-    <form v-if="isSearchOpen" action="POST" class="sm:hidden gap-2 h-full flex">
+    <form
+      v-if="isSearchOpen"
+      action="POST"
+      class="sm:hidden gap-2 h-full flex w-full"
+    >
       <div
-        class="flex items-center bg-lightDark border border-borderColor px-2 rounded-sm"
+        class="flex items-center bg-lightDark border border-borderColor px-2 rounded-sm w-full"
       >
         <Icon
           icon="simple-line-icons:magnifier"

@@ -1,4 +1,5 @@
-const animate = require("tailwindcss-animate")
+const animate = require("tailwindcss-animate");
+import tailwindcssMotion from "tailwindcss-motion";
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -31,7 +32,7 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        
+
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -93,5 +94,5 @@ module.exports = {
       },
     },
   },
-  plugins: [animate],
+  plugins: [animate, tailwindcssMotion],
 };

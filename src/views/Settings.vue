@@ -9,7 +9,6 @@ import {
 } from "../constants/settings";
 import { Button } from "@/components/ui/button";
 import SettingsSection from "@/components/profile/SettingsSection.vue";
-
 </script>
 
 <template>

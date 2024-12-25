@@ -21,6 +21,8 @@ body {
   color: #e8e8e8;
   font-family: "Karla", "Outfit", ui-sans-serif, system-ui, sans-serif,
     Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-feature-settings: normal;
+  font-variation-settings: normal;
 }
 
 /** Primary Accent Colors */
@@ -199,4 +201,15 @@ body {
 .thin-scrollbar::-webkit-scrollbar {
   width: 0px; /* Chrome, Safari, Opera: Makes scrollbar invisible */
   height: 0px; /* For horizontal scrollbars */
+}
+
+.aside-dock {
+  @apply flex bg-[#060707] border-t border-borderColor items-center fixed bottom-0 justify-center w-full overflow-hidden z-50;
+}
+
+.aside-float {
+  @apply w-[95%] flex bg-black/60 border-t border-borderColor items-center fixed bottom-3 rounded-3xl justify-center overflow-hidden z-50  shadow-lg py-1;
+  backdrop-filter: blur(10px);
+  left: 50%;
+  transform: translateX(-50%);
 }

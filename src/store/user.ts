@@ -1,21 +1,12 @@
 import { defaultSettings } from "@/constants/settings";
-import { useLocalStorage, useStorage } from "@vueuse/core";
+import { defaultValues } from "@/constants/history";
+import { useStorage } from "@vueuse/core";
 import { acceptHMRUpdate, defineStore } from "pinia";
-import { computed, watch, watchEffect } from "vue";
+import { watchEffect } from "vue";
 
 export const useUserStore = defineStore("user", () => {
   const localSettings = useStorage("settings", defaultSettings);
-
-  const primaryAccentClass = computed(
-    () => {
-      if (localSettings) {
-        return getPrimaryAccentClass(localSettings.value.primaryAccent);
-      } else {
-        return "miruro";
-      }
-    }
-    // getPrimaryAccentClass(localSettings.value.primaryAccent)
-  );
+  const historyFilters = useStorage("historyFilters", defaultValues);
 
   watchEffect(() => {
     console.log("New primary accent:", localSettings);
@@ -24,23 +15,10 @@ export const useUserStore = defineStore("user", () => {
 
   return {
     localSettings,
-    primaryAccentClass,
+    historyFilters,
   };
 });
 
 if (import.meta.hot) {
   import.meta.hot.accept(acceptHMRUpdate(useUserStore, import.meta.hot));
-}
-
-export function getPrimaryAccentClass(accent: string): string {
-  const accentMap: Record<string, string> = {
-    Miruro: "miruro",
-    Tomato: "tomato",
-    "Royal Blue": "royal-blue",
-    Orange: "orange",
-    "Sea Green": "sea-green",
-    "Hot Pink": "hot-pink",
-  };
-
-  return accentMap[accent] || "miruro";
 }

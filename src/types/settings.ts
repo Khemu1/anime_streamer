@@ -21,3 +21,9 @@ export interface settingOptions {
   values: string[];
   id: SettingsKey;
 }
+
+export type historyFiltersKeys = "videosFrom" | "sortBy";
+export interface historyFilter {
+  name: string;
+  value: string;
+}

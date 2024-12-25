@@ -9,7 +9,8 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { SettingsKey } from "@/types/settings";
-import { useUserStore, getPrimaryAccentClass } from "@/store/user";
+import { useUserStore } from "@/store/user";
+import { getPrimaryAccentClass } from "@/utils/localSettings";
 
 const { title, icon, settings } = defineProps<{
   title: string;
