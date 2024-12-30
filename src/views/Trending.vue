@@ -14,12 +14,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { ref } from "vue";
 
-
 const season = ref("Winter");
 </script>
 
 <template>
-  <div class="p-8 flex flex-col flex-1">
+  <div class="flex flex-col flex-1 mt-10">
     <header class="flex justify-center">
       <div class="flex overflow-x-scroll scrollbar-hide whitespace-nowrap">
         <div

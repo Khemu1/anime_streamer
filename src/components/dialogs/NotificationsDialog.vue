@@ -28,7 +28,9 @@ import { Icon } from "@iconify/vue";
       </Button>
     </DrawerTrigger>
 
-    <DrawerContent class="h-full ml-auto w-[400px] !border-none">
+    <DrawerContent
+      class="h-full ml-auto w-full md:w-[400px] !border-none !z-[101]"
+    >
       <DrawerHeader>
         <DrawerTitle>
           <div class="flex justify-between items-center">

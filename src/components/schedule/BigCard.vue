@@ -79,7 +79,6 @@ import { Icon } from "@iconify/vue";
   border-radius: 0px 0.5rem;
   background-color: white;
   color: black;
-  border: 1px solid;
   z-index: 3;
   transform: rotate(-40deg);
   transform-origin: 0px 0px 0px;

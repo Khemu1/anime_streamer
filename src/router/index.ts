@@ -21,6 +21,7 @@ const routes = [
     name: "schedule",
     component: () => import("@/views/Schedule.vue"),
   },
+  { path: "/", name: "home", component: () => import("@/views/Home.vue") },
   {
     path: "/:pathMatch(.*)",
     name: "PageNotFound",

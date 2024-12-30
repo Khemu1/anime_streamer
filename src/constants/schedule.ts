@@ -1,5 +1,5 @@
 export const days = [
-  { name: "Sunday", value: 7 },
+  { name: "Sunday", value: 0 },
   { name: "Monday", value: 1 },
   { name: "Tuesday", value: 2 },
   { name: "Wednesday", value: 3 },

@@ -12,12 +12,12 @@ console.log("asdasuudjghsjudkgasd", publicUrl);
         >
           <img src="/05.jpg" alt="logo" class="object-fit w-full h-full" />
         </div>
-        <p class="text-[12px] text-gray-300/30">
+        <p class="text-[12px] text-gray-300/30 w-[150px] md:w-auto">
           This website does not retain any files on its server. Rather, it
           solely provides links to media content hosted by third-party services.
         </p>
       </div>
-      <div class="flex gap-5">
+      <div class="flex items-start gap-5 md:gap-10">
         <div class="flex flex-col gap-3">
           <router-link to="#" class="hover:text-white">About</router-link>
           <router-link to="#" class="hover:text-white">Domains</router-link>

@@ -6,6 +6,12 @@
   --secondary-bg-color: #0e0e0e;
   --lightdark-color: #80808018;
   --border-color: #f5f5f51a;
+  --miruro: #ff4f58; /* A slightly deeper and more vibrant tomato red */
+  --tomato: #e74c3c; /* A richer and more vibrant red with a subtle orange undertone */
+  --royal-blue: #3a5fcb; /* A deeper and more vivid royal blue */
+  --orange: #ff7f32; /* A brighter and more lively orange */
+  --sea-green: #1f7a56; /* A more saturated and elegant sea green */
+  --hot-pink: #ff56a1; /* A more vibrant and soft hot pink */
 }
 
 * {
@@ -30,124 +36,124 @@ body {
 /* In your global CSS file (e.g., styles.css or a similar file) */
 
 .miruro {
-  @apply text-[#ff6347]  !important; /* Tomato red */
+  @apply text-[var(--miruro)] !important;
 }
 
 .tomato {
-  @apply text-[#ff5733] !important; /* Orange-red */
+  @apply text-[var(--tomato)] !important;
 }
 
 .royal-blue {
-  @apply text-[#4169e1]   !important; /* Royal blue */
+  @apply text-[var(--royal-blue)] !important;
 }
 
 .orange {
-  @apply text-[#ffa500] !important; /* Orange */
+  @apply text-[var(--orange)] !important;
 }
 
 .sea-green {
-  @apply text-[#2e8b57]  !important; /* Sea green */
+  @apply text-[var(--sea-green)] !important;
 }
 
 .hot-pink {
-  @apply text-[#ff69b4]  !important; /* Hot pink */
+  @apply text-[var(--hot-pink)] !important;
 }
 
 .miruro-hover {
-  @apply group-hover:text-[#ff6347] hover:text-[#ff6347]  transition-all !important; /* Tomato red */
+  @apply group-hover:text-[var(--miruro)] hover:text-[var(--miruro)] transition-all !important;
 }
 
 .tomato-hover {
-  @apply group-hover:text-[#ff5733] hover:text-[#ff5733]  transition-all !important; /* Orange-red */
+  @apply group-hover:text-[var(--tomato)] hover:text-[var(--tomato)] transition-all !important;
 }
 
 .royal-blue-hover {
-  @apply group-hover:text-[#4169e1] hover:text-[#4169e1]  transition-all !important; /* Royal blue */
+  @apply group-hover:text-[var(--royal-blue)] hover:text-[var(--royal-blue)] transition-all !important;
 }
 
 .orange-hover {
-  @apply group-hover:text-[#ffa500] hover:text-[#ffa500]  transition-all !important; /* Orange */
+  @apply group-hover:text-[var(--orange)] hover:text-[var(--orange)] transition-all !important;
 }
 
 .sea-green-hover {
-  @apply group-hover:text-[#2e8b57] hover:text-[#2e8b57]  transition-all !important; /* Sea green */
+  @apply group-hover:text-[var(--sea-green)] hover:text-[var(--sea-green)] transition-all !important;
 }
 
 .hot-pink-hover {
-  @apply group-hover:text-[#ff69b4] hover:text-[#ff69b4]  transition-all !important; /* Hot pink */
+  @apply group-hover:text-[var(--hot-pink)] hover:text-[var(--hot-pink)] transition-all !important;
 }
 
 /* Add right border colors */
 .miruro-border {
-  @apply border-r-2 border-[#ff6347] !important; /* Tomato red */
+  @apply border-r-2 border-[var(--miruro)] !important;
 }
 
 .tomato-border {
-  @apply border-r-2 border-[#ff5733] !important; /* Orange-red */
+  @apply border-r-2 border-[var(--tomato)] !important;
 }
 
 .royal-blue-border {
-  @apply border-r-2 border-[#4169e1] !important; /* Royal blue */
+  @apply border-r-2 border-[var(--royal-blue)] !important;
 }
 
 .orange-border {
-  @apply border-r-2 border-[#ffa500] !important; /* Orange */
+  @apply border-r-2 border-[var(--orange)] !important;
 }
 
 .sea-green-border {
-  @apply border-r-2 border-[#2e8b57] !important; /* Sea green */
+  @apply border-r-2 border-[var(--sea-green)] !important;
 }
 
 .hot-pink-border {
-  @apply border-r-2 border-[#ff69b4]  !important; /* Hot pink */
+  @apply border-r-2 border-[var(--hot-pink)] !important;
 }
 
 .miruro-border-hover {
-  @apply hover:border-[#ff6347] transition-all !important; /* Tomato red */
+  @apply hover:border-[var(--miruro)] transition-all !important;
 }
 
 .tomato-border-hover {
-  @apply hover:border-[#ff5733] transition-all !important; /* Orange-red */
+  @apply hover:border-[var(--tomato)] transition-all !important;
 }
 
 .royal-blue-border-hover {
-  @apply hover:border-[#4169e1] transition-all !important; /* Royal blue */
+  @apply hover:border-[var(--royal-blue)] transition-all !important;
 }
 
 .orange-border-hover {
-  @apply hover:border-[#ffa500] transition-all !important; /* Orange */
+  @apply hover:border-[var(--orange)] transition-all !important;
 }
 
 .sea-green-border-hover {
-  @apply hover:border-[#2e8b57] transition-all !important; /* Sea green */
+  @apply hover:border-[var(--sea-green)] transition-all !important;
 }
 
 .hot-pink-border-hover {
-  @apply hover:border-[#ff69b4] transition-all !important; /* Hot pink */
+  @apply hover:border-[var(--hot-pink)] transition-all !important;
 }
 
 .miruro-bg {
-  @apply bg-[#ff6347] !important; /* Tomato red */
+  @apply bg-[var(--miruro)] !important;
 }
 
 .tomato-bg {
-  @apply bg-[#ff5733] !important; /* Orange-red */
+  @apply bg-[var(--tomato)] !important;
 }
 
 .royal-blue-bg {
-  @apply bg-[#4169e1] !important; /* Royal blue */
+  @apply bg-[var(--royal-blue)] !important;
 }
 
 .orange-bg {
-  @apply bg-[#ffa500] !important; /* Orange */
+  @apply bg-[var(--orange)] !important;
 }
 
 .sea-green-bg {
-  @apply bg-[#2e8b57] !important; /* Sea green */
+  @apply bg-[var(--sea-green)] !important;
 }
 
 .hot-pink-bg {
-  @apply bg-[#ff69b4] !important; /* Hot pink */
+  @apply bg-[var(--hot-pink)] !important;
 }
 
 .borderless-input {
@@ -184,24 +190,17 @@ body {
 
 /* Hide scrollbars for better aesthetics */
 .scrollbar-hide {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none !important; /* IE and Edge */
+  scrollbar-width: none !important; /* Firefox */
+  user-select: none;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, and Opera */
+  display: none !important; /* Chrome, Safari, and Opera */
+  user-select: none;
 }
 
 /* Make scrollbars thin and invisible */
-.thin-scrollbar {
-  scrollbar-width: thin; /* Firefox: Makes scrollbar thinner */
-  -ms-overflow-style: none; /* IE and Edge */
-}
-
-.thin-scrollbar::-webkit-scrollbar {
-  width: 0px; /* Chrome, Safari, Opera: Makes scrollbar invisible */
-  height: 0px; /* For horizontal scrollbars */
-}
 
 .aside-dock {
   @apply flex bg-[#060707] border-t border-borderColor items-center fixed bottom-0 justify-center w-full overflow-hidden z-50;
@@ -212,4 +211,36 @@ body {
   backdrop-filter: blur(10px);
   left: 50%;
   transform: translateX(-50%);
+}
+
+.swiper-container {
+  padding-right: 20px; /* Add right padding here */
+  box-sizing: border-box; /* Ensure padding doesn't affect the overall size */
+}
+
+/* Slide Styling */
+.swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: gray;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation Button Styling */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #fff !important;
+  z-index: 10;
+  top: 50% !important;
+  transform: translateY(-50%) !important; /* Fix incorrect `translate` syntax */
+}
+
+/*  */
+
+.swiper-button-disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }

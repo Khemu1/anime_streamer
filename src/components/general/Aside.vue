@@ -4,12 +4,27 @@ import { buttons } from "@/constants/mainAside";
 import { useRoute } from "vue-router";
 import { useUserStore } from "@/store/user";
 import { getPrimaryAccentClass, getAsideLayOut } from "@/utils/localSettings";
+import { ref, watch } from "vue";
 
 const route = useRoute();
 const mobileButtons = buttons.filter(
   (button) => button.name !== "Settings" && button.name !== "Profile"
 );
 const { localSettings } = useUserStore();
+const accent = ref(
+  getPrimaryAccentClass(localSettings.primaryAccent) || "miruro"
+);
+
+watch(
+  () => localSettings.primaryAccent,
+  (value) => {
+    console.log("value in aside", value);
+    accent.value = getPrimaryAccentClass(value) || "miruro";
+  },
+  {
+    deep: true,
+  }
+);
 </script>
 
 <template>
@@ -29,19 +44,15 @@ const { localSettings } = useUserStore();
         height="20px"
         class="text-white"
         :class="[
-          route.path === button.route
-            ? `${getPrimaryAccentClass(localSettings.primaryAccent)}`
-            : '',
-          `${getPrimaryAccentClass(localSettings.primaryAccent)}-hover`,
+          route.path === button.route ? `${accent}` : '',
+          `${accent}-hover`,
         ]"
       />
       <span
         class="text-xs text-white mt-1"
         :class="[
-          route.path === button.route
-            ? `${getPrimaryAccentClass(localSettings.primaryAccent)}`
-            : '',
-          `${getPrimaryAccentClass(localSettings.primaryAccent)}-hover`,
+          route.path === button.route ? `${accent}` : '',
+          `${accent}-hover`,
         ]"
       >
         {{ button.name }}
@@ -49,9 +60,7 @@ const { localSettings } = useUserStore();
       <span
         v-if="route.path === button.route"
         :class="[
-          `absolute top-0 right-[-1px] h-full ${getPrimaryAccentClass(
-            localSettings.primaryAccent
-          )}-bg rounded-full w-[1px]`,
+          `absolute top-0 right-[-1px] h-full ${accent}-bg rounded-full w-[1px]`,
         ]"
       ></span>
     </router-link>
@@ -74,19 +83,13 @@ const { localSettings } = useUserStore();
         height="20px"
         class="text-white"
         :class="[
-          route.path === button.route
-            ? `${getPrimaryAccentClass(localSettings.primaryAccent)}`
-            : '',
-          `${getPrimaryAccentClass(localSettings.primaryAccent)}-hover`,
+          route.path === button.route ? `${accent}` : '',
+          `${accent}-hover`,
         ]"
       />
       <span
         class="text-xs text-white mt-1"
-        :class="[
-          route.path === button.route
-            ? `${getPrimaryAccentClass(localSettings.primaryAccent)}`
-            : '',
-        ]"
+        :class="[route.path === button.route ? `${accent}` : '']"
       >
         {{ button.name }}
       </span>

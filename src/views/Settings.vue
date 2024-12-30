@@ -1,14 +1,81 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
-
 import {
   appearance,
   displayLanguage,
   comments,
   mediaSettings,
 } from "../constants/settings";
+
+import Toaster from "@/components/ui/toast/Toaster.vue";
+import { useToast } from "@/components/ui/toast/use-toast";
 import { Button } from "@/components/ui/button";
 import SettingsSection from "@/components/profile/SettingsSection.vue";
+import { ref, watch } from "vue";
+import { useUserStore } from "@/store/user";
+import { getPrimaryAccentClass } from "@/utils/localSettings";
+import KeyBoardShortcuts from "@/components/settings/dialogs/KeyBoardShortcuts.vue";
+
+const { localSettings, resetLocalSettings, resetWatchList } = useUserStore();
+const accent = ref(
+  getPrimaryAccentClass(localSettings.primaryAccent) || "miruro"
+);
+
+const { toast } = useToast();
+const isError = ref(false);
+
+const activateToast = (
+  title: string,
+  stringVariant: "default" | "destructive",
+  description?: string
+) => {
+  toast({
+    title,
+    description,
+    variant: stringVariant,
+  });
+};
+
+const handleRestoreDefaultSettings = () => {
+  isError.value = false;
+  try {
+    resetLocalSettings();
+
+    activateToast(
+      "Settings Restored",
+      "default",
+      "All settings have been restored to defaults."
+    );
+  } catch (error) {
+    isError.value = true;
+    activateToast("Error", "destructive", "Failed to restore settings.");
+    console.error("Error restoring default settings:", error);
+  }
+};
+
+const handleClearWatchList = () => {
+  isError.value = false;
+  try {
+    resetWatchList();
+    activateToast(
+      "Watch List Cleared",
+      "default",
+      "Your 'Continue Watching' list has been cleared."
+    );
+  } catch (error) {
+    isError.value = true;
+    activateToast("Error", "destructive", "Failed to clear watch list.");
+    console.error("Error clearing watch list:", error);
+  }
+};
+
+watch(
+  () => localSettings.primaryAccent,
+  (value) => {
+    console.log(value);
+    accent.value = getPrimaryAccentClass(value);
+  }
+);
 </script>
 
 <template>
@@ -37,14 +104,13 @@ import SettingsSection from "@/components/profile/SettingsSection.vue";
         :settings="mediaSettings"
       />
 
-      <!-- Other Settings -->
       <section class="py-1 px-3">
         <div class="flex gap-2">
           <Icon
             icon="ri:tools-fill"
             width="30px"
             height="30px"
-            style="color: #ffffff"
+            :class="[accent, 'transition-all']"
           />
           <h2 class="text-2xl font-bold mb-4">Other Settings</h2>
         </div>
@@ -60,11 +126,7 @@ import SettingsSection from "@/components/profile/SettingsSection.vue";
                 Configure keyboard shortcuts for the application.
               </p>
             </div>
-            <Button
-              class="w-[200px] font-semibold bg-transparent hover:bg-[#00000010] text-white border border-[#68676744]"
-            >
-              button
-            </Button>
+            <KeyBoardShortcuts />
           </div>
         </div>
         <div class="mb-6">
@@ -82,6 +144,7 @@ import SettingsSection from "@/components/profile/SettingsSection.vue";
             </div>
             <Button
               class="w-[200px] font-semibold bg-transparent hover:bg-[#00000010] text-red-600 border border-[#68676744]"
+              @click="handleClearWatchList"
             >
               Clear
             </Button>
@@ -101,6 +164,7 @@ import SettingsSection from "@/components/profile/SettingsSection.vue";
             </div>
             <Button
               class="w-[200px] font-semibold bg-transparent hover:bg-[#00000010] text-red-600 border border-[#68676744]"
+              @click="handleRestoreDefaultSettings"
             >
               Restore
             </Button>
@@ -109,4 +173,8 @@ import SettingsSection from "@/components/profile/SettingsSection.vue";
       </section>
     </div>
   </main>
+  <Toaster
+    class="bg-[#00000010] text-white"
+    :class="isError ? '!bg-red-600' : '!bg-green-600'"
+  />
 </template>

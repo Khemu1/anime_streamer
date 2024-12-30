@@ -30,7 +30,7 @@ const handleSearchBarToggle = () => {
 
 <template>
   <nav
-    class="fixed z-[999] top-0 flex flex-col gap-3 sm:flex-row w-full p-2.5 bg-secondaryBg border-b border-borderColor items-center justify-between px-2"
+    class="fixed z-[100] top-0 flex flex-col gap-3 sm:flex-row w-full p-2.5 bg-[#060707] md:bg-secondaryBg sm:border-b border-borderColor items-center justify-between px-2"
   >
     <div class="w-full flex items-center justify-between">
       <router-link

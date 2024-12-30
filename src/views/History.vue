@@ -8,30 +8,33 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import {
-  Pagination,
-  PaginationEllipsis,
-  PaginationFirst,
-  PaginationLast,
-  PaginationList,
-  PaginationListItem,
-  PaginationNext,
-  PaginationPrev,
-} from "@/components/ui/pagination";
-
-import { Button } from "@/components/ui/button";
+import { Icon } from "@iconify/vue";
 
 import { videosFrom, sortBy } from "@/constants/history";
 import { useUserStore } from "@/store/user";
 import { ref } from "vue";
 import VideoBox from "@/components/history/VideoBox.vue";
 
+const currentPage = ref(1);
+
+const incrementPage = () => {
+  if (currentPage.value < 5) {
+    currentPage.value++;
+  }
+};
+
+const decrementPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--;
+  }
+};
+
 const { historyFilters } = useUserStore();
 const searchText = ref<string>("");
 </script>
 
 <template>
-  <section class="flex flex-1 flex-col p-8">
+  <section class="flex flex-1 flex-col mt-10">
     <header class="flex flex-wrap items-center gap-4 w-full">
       <div class="flex-shrink-0 w-max">
         <Select v-model="historyFilters.videosFrom">
@@ -52,7 +55,6 @@ const searchText = ref<string>("");
         </Select>
       </div>
 
-      <!-- Select Dropdown 2 -->
       <div class="flex-shrink-0 w-max">
         <Select v-model="historyFilters.sortBy">
           <SelectTrigger class="w-[200px] transition-all bg-lightDark !py-2">
@@ -87,13 +89,13 @@ const searchText = ref<string>("");
       <section
         class="mt-6 grid grid-cols-[repeat(auto-fill,_minmax(auto,_1fr))] sm:grid-cols-[repeat(auto-fill,_minmax(320px,_1fr))] gap-5"
       >
-        <VideoBox />
-        <VideoBox />
+        <VideoBox :watchList="true" />
+        <VideoBox :watchList="true" />
 
-        <VideoBox />
-        <VideoBox />
+        <VideoBox :watchList="true" />
+        <VideoBox :watchList="true" />
 
-        <VideoBox />
+        <VideoBox :watchList="true" />
       </section>
       <div class="flex justify-between mt-5 items-center">
         <div class="font-semibold">
@@ -105,38 +107,38 @@ const searchText = ref<string>("");
           <strong>95</strong>
           results
         </div>
-        <Pagination
-          v-slot="{ page }"
-          :total="100"
-          :sibling-count="1"
-          show-edges
-          :default-page="2"
+        <div
+          class="flex items-center justify-between bg-[#0e0e0e] border border-borderColor rounded-md w-[100px] overflow-hidden"
         >
-          <PaginationList v-slot="{ items }" class="flex items-center gap-1">
-            <PaginationFirst />
-            <PaginationPrev />
+          <button
+            class="h-full transition-all"
+            :class="currentPage > 1 ? 'bg-lightDark' : ''"
+            :disabled="currentPage < 2"
+            @click="decrementPage"
+          >
+            <Icon
+              icon="ic:baseline-keyboard-arrow-left"
+              width="30px"
+              height="30px"
+              style="color: #ffffff"
+            />
+          </button>
 
-            <div v-for="(item, index) in items">
-              <PaginationListItem
-                v-if="item.type === 'page'"
-                :key="index"
-                :value="item.value"
-                as-child
-              >
-                <Button
-                  class="w-10 h-10 p-0"
-                  :variant="item.value === page ? 'default' : 'outline'"
-                >
-                  {{ item.value }}
-                </Button>
-              </PaginationListItem>
-              <PaginationEllipsis v-else :key="item.type" :index="index" />
-            </div>
+          <span class="px-2 text-white">{{ currentPage }}</span>
 
-            <PaginationNext />
-            <PaginationLast />
-          </PaginationList>
-        </Pagination>
+          <button
+            class="h-full transition-all"
+            @click="incrementPage"
+            :class="currentPage >= 1 && currentPage < 5 ? 'bg-lightDark' : ''"
+          >
+            <Icon
+              icon="ic:baseline-keyboard-arrow-right"
+              width="30px"
+              height="30px"
+              style="color: #ffffff"
+            />
+          </button>
+        </div>
       </div>
     </section>
   </section>

@@ -15,6 +15,7 @@ export type SettingsKey =
   | "autoSkipIntroOutro"
   | "autoPlay";
 
+export type Settings = Record<SettingsKey, string>;
 export interface settingOptions {
   name: string;
   desc: string;

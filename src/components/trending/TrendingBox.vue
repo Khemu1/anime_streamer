@@ -50,36 +50,79 @@ const showLeftFade = ref(false);
 const showRightFade = ref(true);
 
 const handleScroll = () => {
-  if (!containerRef.value) return;
+  const container = containerRef.value;
+  if (!container) return;
 
-  const { scrollLeft, scrollWidth, clientWidth } = containerRef.value;
+  const { scrollLeft, scrollWidth, clientWidth } = container;
 
-  console.log(
-    "scrollLeft:",
-    scrollLeft,
-    "scrollWidth:",
-    scrollWidth,
-    "clientWidth:",
-    clientWidth
-  );
-
-  // Show the left fade if we are scrolled left
   showLeftFade.value = scrollLeft > 0;
-
-  // Show the right fade if there's overflow on the right
   showRightFade.value = scrollLeft + clientWidth < scrollWidth;
 };
 
+const enableMouseScroll = () => {
+  const container = containerRef.value;
+  if (!container) return;
+
+  let isDown = false;
+  let startX = 0;
+  let scrollLeft = 0;
+
+  const mouseDownHandler = (e: MouseEvent) => {
+    isDown = true;
+    startX = e.pageX - container.offsetLeft;
+    scrollLeft = container.scrollLeft;
+    container.style.cursor = "grabbing";
+  };
+
+  const mouseUpHandler = () => {
+    isDown = false;
+    container.style.cursor = "grab";
+  };
+
+  const mouseLeaveHandler = () => {
+    isDown = false;
+    container.style.cursor = "grab";
+  };
+
+  const mouseMoveHandler = (e: MouseEvent) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX) * 2;
+    container.scrollLeft = scrollLeft - walk;
+  };
+
+  container.addEventListener("mousedown", mouseDownHandler);
+  container.addEventListener("mouseup", mouseUpHandler);
+  container.addEventListener("mouseleave", mouseLeaveHandler);
+  container.addEventListener("mousemove", mouseMoveHandler);
+};
+
+const addListeners = () => {
+  const container = containerRef.value;
+  if (!container) return;
+
+  container.addEventListener("scroll", handleScroll);
+  enableMouseScroll();
+  window.addEventListener("resize", handleScroll);
+
+  handleScroll();
+};
+
+const removeListeners = () => {
+  const container = containerRef.value;
+  if (!container) return;
+
+  container.removeEventListener("scroll", handleScroll);
+  window.removeEventListener("resize", handleScroll);
+};
+
 onMounted(() => {
-  if (containerRef.value) {
-    containerRef.value.addEventListener("scroll", handleScroll);
-  }
+  addListeners();
 });
 
 onUnmounted(() => {
-  if (containerRef.value) {
-    containerRef.value.removeEventListener("scroll", handleScroll);
-  }
+  removeListeners();
 });
 </script>
 
@@ -94,7 +137,7 @@ onUnmounted(() => {
       >
         <img
           src="/ezgif.com-animated-gif-maker_2.gif"
-          class="w-full h-full object-fit transition-all duration-300 ease-in-out group-hover:opacity-70 group-hover:translate-y-[-4px]"
+          class="w-full h-full object-fit transition-all duration-300 ease-in-out rounded-md group-hover:opacity-50 group-hover:translate-y-[-4px]"
           alt="Preview of DAN DA DAN"
         />
         <Icon
@@ -183,12 +226,16 @@ onUnmounted(() => {
           <div
             class="flex gap-1 justify-center items-center bg-gray-200/5 p-0.5 px-1 rounded-sm hover:text-white"
           >
-            <span
-              class="text-center font-extrabold bg-gray-300/20 px-1 rounded-sm w-[25px]"
+            <div
+              class="flex gap-1 items-center p-0.5 rounded-sm px-1 hover:text-white"
             >
-              CC
-            </span>
-            <span class="flex hover:text-white">0 / 12</span>
+              <Icon
+                icon="material-symbols:subtitles-rounded"
+                width="14px"
+                height="14px"
+              />
+              <span class="">0 / 12</span>
+            </div>
           </div>
 
           <div
@@ -246,11 +293,15 @@ onUnmounted(() => {
         ></div>
 
         <!-- Scrollable Tag List -->
-        <div ref="containerRef" class="flex gap-2 overflow-x-auto w-max">
+        <div
+          ref="containerRef"
+          class="flex gap-2 overflow-x-auto w-full scrollbar-hide scroll-smooth"
+          style="-webkit-overflow-scrolling: touch"
+        >
           <span
             v-for="(tag, index) in tags"
             :key="index"
-            class="py-[0.2rem] px-[0.5rem] bg-gray-300/5 text-xs rounded-sm whitespace-nowrap border border-borderColor font-semibold text-[17px]"
+            class="py-[0.2rem] px-[0.5rem] text-xs rounded-sm whitespace-nowrap border border-borderColor font-semibold text-[17px]"
           >
             {{ tag }}
           </span>

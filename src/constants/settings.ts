@@ -132,3 +132,79 @@ export const defaultSettings: {
   autoPlay: "Enabled",
   autoSkipIntroOutro: "Enabled",
 };
+
+export const shortcuts = [
+  {
+    name: "Play/Pause Toggle",
+    key: "K / Space",
+    description: "Toggle Play/Pause",
+  },
+  {
+    name: "Seek Backward 10 Seconds",
+    key: "J",
+    description: "Seek backward 10 seconds",
+  },
+  {
+    name: "Seek Forward 10 Seconds",
+    key: "L",
+    description: "Seek forward 10 seconds",
+  },
+  {
+    name: "Toggle Fullscreen",
+    key: "F",
+    description: "Toggle Fullscreen mode",
+  },
+  { name: "Toggle Theater Mode", key: "T", description: "Toggle Theater mode" },
+  { name: "Toggle Mute", key: "M", description: "Mute/unmute audio" },
+  {
+    name: "Screenshot Player",
+    key: "[SHIFT+S]",
+    description: "Capture a screenshot of the player",
+  },
+  {
+    name: "Skip Intro/Outro",
+    key: "[SHIFT+ENTER]",
+    description: "Skip intro or outro (if not available, will skip 85 seconds)",
+  },
+  {
+    name: "Previous Episode",
+    key: "[SHIFT+P or B]",
+    description: "Go to the previous episode",
+  },
+  {
+    name: "Next Episode",
+    key: "[SHIFT+N]",
+    description: "Go to the next episode",
+  },
+  { name: "Increase Volume", key: "Arrow Up", description: "Increase volume" },
+  {
+    name: "Decrease Volume",
+    key: "Arrow Down",
+    description: "Decrease volume",
+  },
+  {
+    name: "Seek Forward 5 Seconds",
+    key: "Arrow Right",
+    description: "Seek forward 5 seconds",
+  },
+  {
+    name: "Seek Backward 5 Seconds",
+    key: "Arrow Left",
+    description: "Seek backward 5 seconds",
+  },
+  {
+    name: "Increase Playback Speed",
+    key: "> [SHIFT+,]",
+    description: "Increase playback speed",
+  },
+  {
+    name: "Decrease Playback Speed",
+    key: "< [SHIFT+.]",
+    description: "Decrease playback speed",
+  },
+  {
+    name: "Jump to Percentage (0-90%)",
+    key: "0-9",
+    description: "Jump to a percentage of the video (0-90%)",
+  },
+];

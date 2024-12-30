@@ -1,3 +1,21 @@
+<script lang="ts" setup>
+import { Icon } from "@iconify/vue";
+import { useElementVisibility } from "@vueuse/core";
+import { ref } from "vue";
+
+const { episode } = defineProps<{
+  episode: {
+    airedTime: string;
+    title: string;
+    episodeNumber: number;
+    imageUrl: string;
+  };
+}>();
+
+const target = ref(null);
+const targetIsVisible = useElementVisibility(target);
+</script>
+
 <template>
   <div
     class="relative flex w-full md:w-[416px] gap-2 border-[.5px] border-borderColor bg-[#0e0e0e]/20 rounded-md bg-dark pr-2 overflow-hidden group xl:hover:scale-[101%] transition-transform cursor-pointer"
@@ -35,24 +53,6 @@
     </div>
   </div>
 </template>
-
-<script lang="ts" setup>
-import { Icon } from "@iconify/vue";
-import { useElementVisibility } from "@vueuse/core";
-import { ref } from "vue";
-
-const { episode } = defineProps<{
-  episode: {
-    airedTime: string;
-    title: string;
-    episodeNumber: number;
-    imageUrl: string;
-  };
-}>();
-
-const target = ref(null);
-const targetIsVisible = useElementVisibility(target);
-</script>
 
 <style scoped>
 .airing-time .status-indicator {

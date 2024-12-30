@@ -113,22 +113,19 @@ console.log(currentDay.value);
 const updateSelectedDate = (dayValue: number) => {
   const today = new Date();
   const todayDayIndex = today.getDay();
-
-  let diff = dayValue - todayDayIndex;
-  console.log(diff, dayValue, todayDayIndex);
-
-  if (diff > 0) {
-    diff -= 7;
-  }
+  const diff = dayValue - todayDayIndex;
 
   const newDate = new Date(today);
   newDate.setDate(today.getDate() + diff);
+
   selectedDate.value = newDate;
+
+  console.log("Selected Date:", newDate);
 };
 </script>
 
 <template>
-  <div class="flex-1 flex flex-col py-4 px-6 md:px-16 gap-8">
+  <div class="flex-1 flex flex-col gap-8 mt-10">
     <div
       class="flex w-full justify-around flex-col xl:flex-row flex-wrap gap-4"
     >
@@ -197,15 +194,12 @@ const updateSelectedDate = (dayValue: number) => {
                 class="flex w-[.2rem] rounded-sm bg-borderColor flex-shrink-0"
               ></div>
               <div class="flex flex-wrap gap-4 w-full">
-                <template
-                  v-for="(item, index) in schedule.episodes"
-                  :key="index"
-                >
+                <div v-for="(item, index) in schedule.episodes" :key="index">
                   <SmallCard
                     :episode="{ ...item, airedTime: schedule.airTime }"
                     class=""
                   />
-                </template>
+                </div>
               </div>
             </div>
           </div>

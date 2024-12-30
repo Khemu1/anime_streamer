@@ -11,6 +11,8 @@ import {
 import { SettingsKey } from "@/types/settings";
 import { useUserStore } from "@/store/user";
 import { getPrimaryAccentClass } from "@/utils/localSettings";
+import { onMounted, watch } from "vue";
+import { ref } from "vue";
 
 const { title, icon, settings } = defineProps<{
   title: string;
@@ -24,6 +26,20 @@ const { title, icon, settings } = defineProps<{
 }>();
 
 const { localSettings } = useUserStore();
+const accent = ref(
+  getPrimaryAccentClass(localSettings.primaryAccent) || "miruro"
+);
+
+watch(
+  () => localSettings.primaryAccent,
+  (value) => {
+    console.log("value", value);
+    accent.value = getPrimaryAccentClass(value) || "miruro";
+  },
+  {
+    deep: true,
+  }
+);
 </script>
 
 <template>
@@ -33,10 +49,7 @@ const { localSettings } = useUserStore();
         :icon="icon"
         width="30px"
         height="30px"
-        :class="[
-          getPrimaryAccentClass(localSettings.primaryAccent),
-          'transition-all',
-        ]"
+        :class="[accent, 'transition-all']"
       />
       <h2 class="text-2xl font-bold mb-4">{{ title }}</h2>
     </div>
