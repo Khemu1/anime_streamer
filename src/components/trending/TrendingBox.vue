@@ -5,11 +5,13 @@ import { onMounted, onUnmounted, ref } from "vue";
 import { useUserStore } from "@/store/user";
 import { getPrimaryAccentClass } from "@/utils/localSettings";
 import { formatNumber } from "@/utils/trending";
+import { storeToRefs } from "pinia";
 
 const imageHover = ref();
 const isHovered = useElementHover(imageHover);
 
-const { localSettings } = useUserStore();
+const userStore = useUserStore();
+const { localSettings } = storeToRefs(userStore);
 
 const tags = [
   "Action",

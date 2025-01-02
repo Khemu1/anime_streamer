@@ -13,7 +13,8 @@ export type SettingsKey =
   | "forceMaxQuality"
   | "autoNextEpisode"
   | "autoSkipIntroOutro"
-  | "autoPlay";
+  | "autoPlay"
+  | "defaultTheme";
 
 export type Settings = Record<SettingsKey, string>;
 export interface settingOptions {

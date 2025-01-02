@@ -2,8 +2,11 @@
 import { useUserStore } from "@/store/user";
 import VideoBox from "../history/VideoBox.vue";
 import { onMounted, onUnmounted, ref } from "vue";
+import VideoBoxSkeleton from "../history/skeletons/VideoBoxSkeleton.vue";
+import { storeToRefs } from "pinia";
 
-const { watchList } = useUserStore();
+const userStore = useUserStore();
+const { watchList } = storeToRefs(userStore);
 
 const containerRef = ref<HTMLDivElement | null>(null);
 
@@ -92,10 +95,11 @@ onUnmounted(() => {
       <div
         class="flex gap-4 flex-shrink-0 rounded-md overflow-x-scroll md:*:w-[300px] *:w-[270px]"
       >
-        <VideoBox :watchList="true" />
-        <VideoBox :watchList="true" />
+        <VideoBox />
+        <VideoBox />
 
-        <VideoBox :watchList="true" />
+        <VideoBoxSkeleton :watchList="true" />
+        <VideoBoxSkeleton :watchList="true" />
       </div>
 
       <router-link

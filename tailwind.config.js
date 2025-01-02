@@ -23,6 +23,14 @@ module.exports = {
       },
     },
     extend: {
+      safelist: [
+        "hover:border-hot-pink",
+        "hover:border-tomato",
+        "hover:border-miruro",
+        "hover:border-royal-blue",
+        "hover:border-orange",
+        "hover:border-sea-green",
+      ],
       colors: {
         secondaryBg: "var(--secondary-bg-color)",
         lightDark: "var(--lightdark-color)",
@@ -32,6 +40,17 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        miruro: "var(--miruro)",
+        tomato: "var(--tomato)",
+        "royal-blue": "var(--royal-blue)",
+        orange: "var(--orange)",
+        "sea-green": "var(--sea-green)",
+        "hot-pink": "var(--hot-pink)",
+        "schedule-big-card-bg-color": "var(--schedule-big-card-bg-color)",
+        "schedule-big-card-tag-bg-color":
+          "var(--schedule-big-card-tag-bg-color)",
+        "schedule-small-card-bg-color": "var(--schedule-small-card-bg-color)",
+        "catigories-bg-color": "var(--catigories-bg-color)",
 
         primary: {
           DEFAULT: "hsl(var(--primary))",

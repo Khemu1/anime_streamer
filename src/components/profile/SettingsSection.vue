@@ -1,18 +1,9 @@
 <script setup lang="ts">
 import { Icon } from "@iconify/vue";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-} from "@/components/ui/select";
+import { Select, SelectItem } from "@/components/ui/select";
 import { SettingsKey } from "@/types/settings";
 import { useUserStore } from "@/store/user";
-import { getPrimaryAccentClass } from "@/utils/localSettings";
-import { onMounted, watch } from "vue";
-import { ref } from "vue";
+import { storeToRefs } from "pinia";
 
 const { title, icon, settings } = defineProps<{
   title: string;
@@ -25,21 +16,8 @@ const { title, icon, settings } = defineProps<{
   }[];
 }>();
 
-const { localSettings } = useUserStore();
-const accent = ref(
-  getPrimaryAccentClass(localSettings.primaryAccent) || "miruro"
-);
-
-watch(
-  () => localSettings.primaryAccent,
-  (value) => {
-    console.log("value", value);
-    accent.value = getPrimaryAccentClass(value) || "miruro";
-  },
-  {
-    deep: true,
-  }
-);
+const userStore = useUserStore();
+const { localSettings, accent } = storeToRefs(userStore);
 </script>
 
 <template>
@@ -58,27 +36,20 @@ watch(
         class="flex flex-col sm:flex-row justify-between gap-4 sm:items-center flex-wrap"
       >
         <div class="flex flex-col gap-2">
-          <label class="block font-semibold text-[18px] text-gray-200">
+          <label class="block text-[18px] font-semibold">
             {{ item.name }}
           </label>
-          <p class="text-[gray] text-sm mb-2 w-[350px]">{{ item.desc }}</p>
+          <p class="text-sm mb-2 w-[350px] opacity-60">{{ item.desc }}</p>
         </div>
-        <!-- had add a type for keys in order to do this approach-->
-        <Select class="w-[224px]" v-model="localSettings[item.id]">
-          <SelectTrigger class="w-[200px]">
-            <SelectValue placeholder="Select an option" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup class="w-[200px]">
-              <SelectItem
-                v-for="(value, idx) in item.values"
-                :key="idx"
-                :value="value"
-              >
-                {{ value }}
-              </SelectItem>
-            </SelectGroup>
-          </SelectContent>
+        <Select class="w-[224px] !border-none" v-model="localSettings[item.id]">
+          <SelectItem
+            v-for="(value, idx) in item.values"
+            :key="idx"
+            :value="value"
+            :class="['font-semibold', `${accent}-focus`]"
+          >
+            {{ value }}
+          </SelectItem>
         </Select>
       </div>
     </div>

@@ -18,7 +18,7 @@ const targetIsVisible = useElementVisibility(target);
 
 <template>
   <div
-    class="relative flex w-full md:w-[416px] gap-2 border-[.5px] border-borderColor bg-[#0e0e0e]/20 rounded-md bg-dark pr-2 overflow-hidden group xl:hover:scale-[101%] transition-transform cursor-pointer"
+    class="relative flex w-full md:w-[416px] gap-2 border-[.5px] border-borderColor bg-schedule-small-card-bg-color rounded-md bg-dark pr-2 overflow-hidden group xl:hover:scale-[101%] transition-transform cursor-pointer"
     ref="target"
     :class="targetIsVisible ? 'motion-preset-fade motion-duration-2000' : ''"
   >
@@ -31,10 +31,10 @@ const targetIsVisible = useElementVisibility(target);
     </div>
 
     <div class="episode-info flex justify-center flex-col gap-2 w-full">
-      <p class="font-semibold text-white text-[1rem] truncate">
+      <p class="font-semibold text-[1rem] truncate">
         {{ episode.title }}
       </p>
-      <p class="text-sm text-[gray] truncate">
+      <p class="text-[13px] truncate opacity-70">
         EP
         <strong>{{ episode.episodeNumber }}</strong>
         aired at

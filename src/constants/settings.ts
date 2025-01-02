@@ -131,6 +131,7 @@ export const defaultSettings: {
   autoNextEpisode: "Enabled",
   autoPlay: "Enabled",
   autoSkipIntroOutro: "Enabled",
+  defaultTheme: "dark",
 };
 
 export const shortcuts = [

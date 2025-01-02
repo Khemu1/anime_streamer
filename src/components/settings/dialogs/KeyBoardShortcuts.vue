@@ -2,7 +2,6 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -10,13 +9,18 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { shortcuts } from "@/constants/settings";
+
+const { style } = defineProps<{
+  style: string;
+}>();
 </script>
 
 <template>
   <Dialog>
     <DialogTrigger as-child>
       <Button
-        class="w-[200px] font-semibold bg-transparent hover:bg-[#00000010] text-white border border-[#68676744]"
+        class="w-[200px] font-semibold bg-lightDark hover:bg-[#00000010] border border-[#68676744]"
+        :style="{ color: style }"
       >
         Open
       </Button>

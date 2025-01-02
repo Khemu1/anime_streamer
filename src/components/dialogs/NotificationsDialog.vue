@@ -9,6 +9,10 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 
+const { style } = defineProps<{
+  style: string;
+}>();
+
 import { Button } from "@/components/ui/button";
 import { Icon } from "@iconify/vue";
 </script>
@@ -23,7 +27,7 @@ import { Icon } from "@iconify/vue";
           icon="material-symbols-light:bottom-drawer"
           width="50px"
           height="50px"
-          style="color: #ffffff"
+          :style="{ color: style }"
         />
       </Button>
     </DrawerTrigger>

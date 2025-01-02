@@ -1,12 +1,5 @@
 <script setup lang="ts">
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-} from "@/components/ui/select";
+import { Select, SelectItem } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Icon } from "@iconify/vue";
 
@@ -14,6 +7,8 @@ import { videosFrom, sortBy } from "@/constants/history";
 import { useUserStore } from "@/store/user";
 import { ref } from "vue";
 import VideoBox from "@/components/history/VideoBox.vue";
+import VideoBoxSkeleton from "@/components/history/skeletons/VideoBoxSkeleton.vue";
+import { storeToRefs } from "pinia";
 
 const currentPage = ref(1);
 
@@ -29,7 +24,9 @@ const decrementPage = () => {
   }
 };
 
-const { historyFilters } = useUserStore();
+const userStore = useUserStore();
+const { historyFilters, accent } = storeToRefs(userStore);
+
 const searchText = ref<string>("");
 </script>
 
@@ -38,39 +35,26 @@ const searchText = ref<string>("");
     <header class="flex flex-wrap items-center gap-4 w-full">
       <div class="flex-shrink-0 w-max">
         <Select v-model="historyFilters.videosFrom">
-          <SelectTrigger class="w-[200px] transition-all bg-lightDark !py-2">
-            <SelectValue placeholder="Select an option" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem
-                v-for="(item, idx) in videosFrom"
-                :key="idx"
-                :value="item.value"
-              >
-                {{ item.name }}
-              </SelectItem>
-            </SelectGroup>
-          </SelectContent>
+          <SelectItem
+            v-for="(videoFrom, idx) in videosFrom"
+            :key="idx"
+            :value="videoFrom.value"
+            :class="['font-semibold', `${accent}-focus`]"
+          >
+            {{ videoFrom.name }}
+          </SelectItem>
         </Select>
       </div>
 
       <div class="flex-shrink-0 w-max">
         <Select v-model="historyFilters.sortBy">
-          <SelectTrigger class="w-[200px] transition-all bg-lightDark !py-2">
-            <SelectValue placeholder="Select an option" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem
-                v-for="(item, idx) in sortBy"
-                :key="idx"
-                :value="item.value"
-              >
-                {{ item.name }}
-              </SelectItem>
-            </SelectGroup>
-          </SelectContent>
+          <SelectItem
+            v-for="(sort, idx) in sortBy"
+            :key="idx"
+            :value="sort.value"
+          >
+            {{ sort.name }}
+          </SelectItem>
         </Select>
       </div>
 
@@ -80,7 +64,8 @@ const searchText = ref<string>("");
           placeholder="Filter by title"
           name="search"
           id="search"
-          class="w-full sm:w-[200px] bg-lightDark"
+          class="w-full sm:w-[200px] bg-lightDark border-borderColor"
+          :class="[`${accent}-border-hover`, `${accent}-ring-focus`]"
           ref="target"
         />
       </div>
@@ -89,13 +74,13 @@ const searchText = ref<string>("");
       <section
         class="mt-6 grid grid-cols-[repeat(auto-fill,_minmax(auto,_1fr))] sm:grid-cols-[repeat(auto-fill,_minmax(320px,_1fr))] gap-5"
       >
-        <VideoBox :watchList="true" />
-        <VideoBox :watchList="true" />
+        <VideoBoxSkeleton />
+        <VideoBoxSkeleton />
 
-        <VideoBox :watchList="true" />
-        <VideoBox :watchList="true" />
+        <VideoBoxSkeleton />
+        <VideoBoxSkeleton />
 
-        <VideoBox :watchList="true" />
+        <VideoBoxSkeleton />
       </section>
       <div class="flex justify-between mt-5 items-center">
         <div class="font-semibold">

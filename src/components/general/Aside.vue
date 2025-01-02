@@ -3,33 +3,20 @@ import { Icon } from "@iconify/vue";
 import { buttons } from "@/constants/mainAside";
 import { useRoute } from "vue-router";
 import { useUserStore } from "@/store/user";
-import { getPrimaryAccentClass, getAsideLayOut } from "@/utils/localSettings";
-import { ref, watch } from "vue";
+import { storeToRefs } from "pinia";
+import { getAsideLayOut } from "@/utils/localSettings";
 
 const route = useRoute();
 const mobileButtons = buttons.filter(
   (button) => button.name !== "Settings" && button.name !== "Profile"
 );
-const { localSettings } = useUserStore();
-const accent = ref(
-  getPrimaryAccentClass(localSettings.primaryAccent) || "miruro"
-);
-
-watch(
-  () => localSettings.primaryAccent,
-  (value) => {
-    console.log("value in aside", value);
-    accent.value = getPrimaryAccentClass(value) || "miruro";
-  },
-  {
-    deep: true,
-  }
-);
+const userStore = useUserStore();
+const { localSettings, accent } = storeToRefs(userStore);
 </script>
 
 <template>
   <aside
-    class="fixed mt-[59.4px] left-0 top-0 z-[999] w-[64px] h-full bg-secondaryBg border-r border-borderColor hidden md:flex flex-col items-center"
+    class="fixed mt-[59.4px] font-semibold left-0 top-0 z-[999] w-[64px] h-full bg-secondaryBg border-r border-borderColor hidden md:flex flex-col items-center"
   >
     <router-link
       v-for="(button, index) in buttons"
@@ -42,14 +29,14 @@ watch(
         :icon="button.icon"
         width="20px"
         height="20px"
-        class="text-white"
+        class=""
         :class="[
           route.path === button.route ? `${accent}` : '',
           `${accent}-hover`,
         ]"
       />
       <span
-        class="text-xs text-white mt-1"
+        class="text-xs mt-1"
         :class="[
           route.path === button.route ? `${accent}` : '',
           `${accent}-hover`,
@@ -81,14 +68,14 @@ watch(
         :icon="button.icon"
         width="20px"
         height="20px"
-        class="text-white"
+        class=""
         :class="[
           route.path === button.route ? `${accent}` : '',
           `${accent}-hover`,
         ]"
       />
       <span
-        class="text-xs text-white mt-1"
+        class="text-xs mt-1"
         :class="[route.path === button.route ? `${accent}` : '']"
       >
         {{ button.name }}

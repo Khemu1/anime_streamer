@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { useFocus } from "@vueuse/core";
 
 import { Input } from "@/components/ui/input";
@@ -11,14 +11,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useUserStore } from "@/store/user";
 
 import NotificationsDialog from "@/components/dialogs/NotificationsDialog.vue";
+import { storeToRefs } from "pinia";
 
 const searchText = ref<string>("");
-
+const userStore = useUserStore();
+const { localSettings, theme } = storeToRefs(userStore);
 const target = ref();
 const { focused } = useFocus(target);
-
+const iconsColor = computed(() => theme.value === "dark" ? "white" : "black");
 const isSearchOpen = ref(false);
 
 const handleSearchBarToggle = () => {
@@ -26,17 +29,33 @@ const handleSearchBarToggle = () => {
     isSearchOpen.value = !isSearchOpen.value;
   }, 100);
 };
+
+const handleThemeToggle = () => {
+  setTimeout(() => {
+    if (theme.value === "dark") {
+      theme.value = "light";
+      document.documentElement.classList.add("light-theme");
+      document.documentElement.classList.remove("dark-theme");
+    } else {
+      theme.value = "dark";
+      document.documentElement.classList.add("dark-theme");
+      document.documentElement.classList.remove("light-theme");
+    }
+  }, 100);
+};
+
+
 </script>
 
 <template>
   <nav
-    class="fixed z-[100] top-0 flex flex-col gap-3 sm:flex-row w-full p-2.5 bg-[#060707] md:bg-secondaryBg sm:border-b border-borderColor items-center justify-between px-2"
+    class="fixed z-[100] top-0 flex flex-col gap-3 sm:flex-row w-full p-2.5 md:bg-secondaryBg sm:border-b border-borderColor shadow-lg sm:shadow-none items-center justify-between px-2"
+    :class="[
+      localSettings.defaultTheme === 'dark' ? 'bg-[#060707]' : 'bg-white',
+    ]"
   >
     <div class="w-full flex items-center justify-between">
-      <router-link
-        to="/"
-        class="flex items-center text-white font-extrabold uppercase"
-      >
+      <router-link to="/" class="flex items-center font-extrabold uppercase">
         AnimeVault
       </router-link>
 
@@ -49,8 +68,14 @@ const handleSearchBarToggle = () => {
             icon="simple-line-icons:magnifier"
             width="15px"
             height="15px"
-            class="transition-all"
-            :style="{ color: focused ? '#ffffff' : '#a0a0a0' }"
+            :class="[
+              'transition-all',
+              `text-${iconsColor}`,
+              localSettings.defaultTheme === 'dark'
+                ? 'text-white'
+                : 'text-black',
+              focused ? 'opacity-100' : 'opacity-50',
+            ]"
           />
           <Input
             v-model="searchText"
@@ -64,8 +89,14 @@ const handleSearchBarToggle = () => {
             icon="tabler:drone"
             width="20px"
             height="20px"
-            class="transition-all"
-            :style="{ color: focused ? '#ffffff' : '#a0a0a0' }"
+            :class="[
+              'transition-all',
+              `text-${iconsColor}`,
+              localSettings.defaultTheme === 'dark'
+                ? 'text-white'
+                : 'text-black',
+              focused ? 'opacity-100' : 'opacity-50',
+            ]"
           />
         </div>
         <Button
@@ -73,9 +104,9 @@ const handleSearchBarToggle = () => {
         >
           <Icon
             icon="simple-line-icons:magnifier"
-            style="color: #ffffff"
             width="15px"
             height="15px"
+            :style="{ color: iconsColor }"
           />
         </Button>
         <Button
@@ -83,9 +114,9 @@ const handleSearchBarToggle = () => {
         >
           <Icon
             icon="hugeicons:shuffle"
-            style="color: #ffffff"
             width="15px"
             height="15px"
+            :style="{ color: iconsColor }"
           />
         </Button>
       </form>
@@ -96,14 +127,24 @@ const handleSearchBarToggle = () => {
           class="flex sm:hidden bg-lightDark hover:bg-lightDark border border-borderColor h-full !rounded-none w-max"
           @click="handleSearchBarToggle"
         >
+          <Icon icon="simple-line-icons:magnifier" width="15px" height="15px" />
+        </Button>
+        <Button
+          class="flex bg-lightDark hover:bg-lightDark border border-borderColor h-full rounded-sm w-max"
+          @click="handleThemeToggle"
+        >
           <Icon
-            icon="simple-line-icons:magnifier"
-            style="color: #ffffff"
+            :icon="
+              localSettings.defaultTheme === 'dark'
+                ? 'solar:sun-2-bold-duotone'
+                : 'solar:moon-bold'
+            "
             width="15px"
             height="15px"
+            :style="{ color: iconsColor }"
           />
         </Button>
-        <NotificationsDialog />
+        <NotificationsDialog :style="iconsColor" />
         <DropdownMenu>
           <DropdownMenuTrigger
             class="sm:hidden flex justify-center items-center !border !border-borderColor bg-lightDark w-[50px] rounded"
@@ -112,7 +153,7 @@ const handleSearchBarToggle = () => {
               icon="tabler:user"
               width="20px"
               height="20px"
-              class="transition-all"
+              :style="{ color: iconsColor }"
             />
           </DropdownMenuTrigger>
           <DropdownMenuContent class="border-borderColor rounded-sm">
@@ -122,7 +163,7 @@ const handleSearchBarToggle = () => {
                   icon="solar:user-bold"
                   width="20px"
                   height="20px"
-                  style="color: #ffffff"
+                  :style="{ color: iconsColor }"
                 />
                 <span>Profile</span>
               </router-link>
@@ -136,7 +177,7 @@ const handleSearchBarToggle = () => {
                   icon="material-symbols:settings-outline"
                   width="20px"
                   height="20px"
-                  style="color: #ffffff"
+                  :style="{ color: iconsColor }"
                 />
                 <span>Settings</span>
               </router-link>
@@ -158,7 +199,7 @@ const handleSearchBarToggle = () => {
           width="15px"
           height="15px"
           class="transition-all"
-          style="color: #ffffff"
+          :style="{ color: iconsColor }"
         />
         <Input
           v-model="searchText"

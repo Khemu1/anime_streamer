@@ -5,7 +5,10 @@ import { useUserStore } from "@/store/user";
 import { getPrimaryAccentClass } from "@/utils/localSettings";
 import BigCard from "@/components/schedule/BigCard.vue";
 import SmallCard from "@/components/schedule/SmallCard.vue";
-const { localSettings } = useUserStore();
+import { storeToRefs } from "pinia";
+
+const userStore = useUserStore();
+const { localSettings } = storeToRefs(userStore);
 
 const schedules = [
   {
@@ -135,7 +138,7 @@ const updateSelectedDate = (dayValue: number) => {
       <BigCard />
     </div>
     <div
-      class="flex mx-auto bg-lightDark border border-borderColor rounded-md w-full scrollbar-hide sm:w-max sm:max-w-full overflow-x-auto max-w-[626px]"
+      class="flex mx-auto bg-catigories-bg-color border border-borderColor rounded-md w-full scrollbar-hide sm:w-max sm:max-w-full overflow-x-auto max-w-[626px]"
     >
       <span
         v-for="(day, index) in days"
@@ -162,7 +165,7 @@ const updateSelectedDate = (dayValue: number) => {
       </span>
     </div>
 
-    <div class="font-semibold text-xl text-white">
+    <div class="font-semibold text-xl">
       <span>
         {{
           selectedDate.toLocaleDateString("en-US", {
@@ -183,7 +186,7 @@ const updateSelectedDate = (dayValue: number) => {
         <div class="flex gap-2 w-full">
           <div class="flex flex-col justify-center gap-2 w-full">
             <div
-              class="airing-time font-semibold flex items-center gap-2 text-white text-[1rem]"
+              class="airing-time font-semibold flex items-center gap-2 text-[1rem]"
             >
               <span class="status-indicator"></span>
               {{ schedule.airTime }}

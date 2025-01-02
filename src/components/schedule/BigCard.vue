@@ -4,7 +4,7 @@ import { Icon } from "@iconify/vue";
 
 <template>
   <div
-    class="min-h-[130px] flex flex-1 justify-between cursor-pointer bg-lightDark border border-borderColor rounded-md p-[1rem] transition-all xl:hover:translate-y-[-4px] group relative overflow-hidden"
+    class="min-h-[130px] flex flex-1 justify-between cursor-pointer bg-schedule-big-card-bg-color border border-borderColor rounded-md p-[1rem] transition-all xl:hover:translate-y-[-4px] group relative overflow-hidden"
   >
     <div class="kFTXSO">
       <Icon
@@ -15,10 +15,10 @@ import { Icon } from "@iconify/vue";
       />
     </div>
     <div class="flex justify-center flex-col text-[0.8rem] gap-2">
-      <p class="font-semibold text-white text-[1rem]">Demon Loard 2099</p>
-      <div class="flex gap-2 font-semibold">
+      <p class="font-semibold text-[1rem]">Demon Loard 2099</p>
+      <div class="flex gap-2 font-semibold *:bg-schedule-big-card-tag-bg-color">
         <div
-          class="flex items-center gap-2 text-white text-sm font-semibold bg-black/20 border border-borderColor p-[0.2rem] px-[0.5rem] rounded-md"
+          class="flex items-center gap-2 text-white text-sm font-semibold border border-borderColor p-[0.2rem] px-[0.5rem] rounded-md"
         >
           <Icon
             icon="material-symbols:subtitles-rounded"

@@ -11,15 +11,16 @@ import Toaster from "@/components/ui/toast/Toaster.vue";
 import { useToast } from "@/components/ui/toast/use-toast";
 import { Button } from "@/components/ui/button";
 import SettingsSection from "@/components/profile/SettingsSection.vue";
-import { ref, watch } from "vue";
+import { computed, ref } from "vue";
 import { useUserStore } from "@/store/user";
-import { getPrimaryAccentClass } from "@/utils/localSettings";
 import KeyBoardShortcuts from "@/components/settings/dialogs/KeyBoardShortcuts.vue";
+import { storeToRefs } from "pinia";
 
-const { localSettings, resetLocalSettings, resetWatchList } = useUserStore();
-const accent = ref(
-  getPrimaryAccentClass(localSettings.primaryAccent) || "miruro"
-);
+const userStore = useUserStore();
+const { resetLocalSettings, resetWatchList } = userStore;
+const { accent, theme } = storeToRefs(userStore);
+
+const textColor = computed(() => (theme.value === "dark" ? "white" : "black"));
 
 const { toast } = useToast();
 const isError = ref(false);
@@ -68,20 +69,12 @@ const handleClearWatchList = () => {
     console.error("Error clearing watch list:", error);
   }
 };
-
-watch(
-  () => localSettings.primaryAccent,
-  (value) => {
-    console.log(value);
-    accent.value = getPrimaryAccentClass(value);
-  }
-);
 </script>
 
 <template>
-  <main class="flex flex-1 justify-center tw-min-h-screen text-white">
+  <main class="flex flex-1 justify-center tw-min-h-screen">
     <div
-      class="flex flex-col gap-5 w-full sm:w-[75%] bg-secondaryBg rounded-lg sm:my-10 p-5"
+      class="flex flex-col gap-5 w-full sm:w-[75%] bg-lightDark rounded-lg sm:my-10 p-5"
     >
       <SettingsSection
         title="Appearance"
@@ -119,14 +112,14 @@ watch(
             class="flex flex-col sm:flex-row justify-between gap-4 sm:items-center flex-wrap"
           >
             <div class="flex flex-col gap-2">
-              <label class="block font-semibold text-[18px] text-gray-200">
+              <label class="block font-semibold text-[18px]">
                 Keyboard Shortcuts
               </label>
-              <p class="text-[gray] text-sm mb-2 w-[350px]">
+              <p class="text-sm mb-2 w-[350px] opacity-60">
                 Configure keyboard shortcuts for the application.
               </p>
             </div>
-            <KeyBoardShortcuts />
+            <KeyBoardShortcuts :style="textColor" />
           </div>
         </div>
         <div class="mb-6">
@@ -134,16 +127,16 @@ watch(
             class="flex flex-col sm:flex-row justify-between gap-4 sm:items-center flex-wrap"
           >
             <div class="flex flex-col gap-2">
-              <label class="block font-semibold text-[18px] text-gray-200">
+              <label class="block font-semibold text-[18px]">
                 Clear Continue Watching
               </label>
-              <p class="text-[gray] text-sm mb-2 w-[350px]">
+              <p class="opacity-60 text-sm mb-2 w-[350px]">
                 Remove all watching entries locally. This won’t affect your
                 AniList account.
               </p>
             </div>
             <Button
-              class="w-[200px] font-semibold bg-transparent hover:bg-[#00000010] text-red-600 border border-[#68676744]"
+              class="w-[200px] font-semibold bg-lightDark hover:bg-[#00000010] text-red-600 border border-[#68676744]"
               @click="handleClearWatchList"
             >
               Clear
@@ -155,15 +148,15 @@ watch(
             class="flex flex-col sm:flex-row justify-between gap-4 sm:items-center flex-wrap"
           >
             <div class="flex flex-col gap-2">
-              <label class="block font-semibold text-[18px] text-gray-200">
+              <label class="block font-semibold text-[18px]">
                 Restore Default Settings
               </label>
-              <p class="text-[gray] text-sm mb-2 w-[350px]">
+              <p class="opacity-60 text-sm mb-2 w-[350px]">
                 Restore all settings to their default values.
               </p>
             </div>
             <Button
-              class="w-[200px] font-semibold bg-transparent hover:bg-[#00000010] text-red-600 border border-[#68676744]"
+              class="w-[200px] font-semibold bg-lightDark hover:bg-[#00000010] text-red-600 border border-[#68676744]"
               @click="handleRestoreDefaultSettings"
             >
               Restore

@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/pagination";
 import { Button } from "@/components/ui/button";
 import { ref } from "vue";
+import TrendingBoxSkeleton from "@/components/trending/skeletons/TrendingBoxSkeleton.vue";
 
 const season = ref("Winter");
 </script>
@@ -46,13 +47,13 @@ const season = ref("Winter");
     <section
       class="mt-6 grid grid-cols-[repeat(auto-fill,_minmax(auto,_1fr))] sm:grid-cols-[repeat(auto-fill,_minmax(545px,_1fr))] gap-5"
     >
-      <TrendingBox />
-      <TrendingBox />
+      <TrendingBoxSkeleton />
+      <TrendingBoxSkeleton />
 
-      <TrendingBox />
-      <TrendingBox />
+      <TrendingBoxSkeleton />
+      <TrendingBoxSkeleton />
 
-      <TrendingBox />
+      <TrendingBoxSkeleton />
     </section>
     <div class="flex justify-between mt-5 items-center">
       <div class="font-semibold">

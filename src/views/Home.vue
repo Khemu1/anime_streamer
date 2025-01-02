@@ -11,8 +11,14 @@ import { useUserStore } from "@/store/user";
 import { getPrimaryAccentClass } from "@/utils/localSettings";
 import VideoCard from "@/components/home/VideoCard.vue";
 import VideosContainer from "@/components/general/VideosContainer.vue";
+import VideoCardSkeleton from "@/components/home/skeletons/VideoCardSkeleton.vue";
+import CategoriesSwiperSkeleton from "@/components/home/skeletons/CategoriesSwiperSkeleton.vue";
+import SwiperSkeleton from "@/components/home/skeletons/SwiperSkeleton.vue";
+import VideosContainerSkeleton from "@/components/general/skeletons/VideosContainerSkeleton.vue";
+import { storeToRefs } from "pinia";
 
-const { localSettings } = useUserStore();
+const userStore = useUserStore();
+const { localSettings } = storeToRefs(userStore);
 
 const currentFilter = ref("newest");
 const currentPage = ref(1);
@@ -137,7 +143,7 @@ const videos = [
 <template>
   <div class="flex flex-1 flex-col gap-4 overflow-x-clip mt-5">
     <div class="w-full mx-auto">
-      <Swiper />
+      <SwiperSkeleton />
     </div>
     <div>
       <CategoriesSwiper />
@@ -209,6 +215,7 @@ const videos = [
       <div
         class="grid w-full grid-cols-[repeat(auto-fill,_minmax(175px,_1fr))] gap-4"
       >
+        <VideoCardSkeleton v-for="_ in 5" class="mb-8" />
         <VideoCard
           v-for="video in videos"
           :key="video.id"
@@ -225,7 +232,7 @@ const videos = [
         class="flex w-full flex-col sm:flex-row justify-between xl:w-max xl:flex-col xl:justify-normal gap-4 flex-shrink-0"
       >
         <div class="flex-1">
-          <VideosContainer
+          <VideosContainerSkeleton
             containerTitle="TOP AIRING"
             icon="ic:baseline-live-tv"
             :videos="videos"

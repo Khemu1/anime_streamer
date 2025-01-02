@@ -4,7 +4,7 @@ console.log("asdasuudjghsjudkgasd", publicUrl);
 </script>
 
 <template>
-  <footer class="p-8 flex flex-col gap-2 text-sm text-[gray]">
+  <footer class="p-8 flex flex-col gap-2 text-sm">
     <div class="flex justify-between w-full border-b-4 pb-4 border-borderColor">
       <div class="flex flex-col gap-2">
         <div
@@ -19,17 +19,13 @@ console.log("asdasuudjghsjudkgasd", publicUrl);
       </div>
       <div class="flex items-start gap-5 md:gap-10">
         <div class="flex flex-col gap-3">
-          <router-link to="#" class="hover:text-white">About</router-link>
-          <router-link to="#" class="hover:text-white">Domains</router-link>
+          <router-link to="#">About</router-link>
+          <router-link to="#">Domains</router-link>
         </div>
         <div class="flex flex-col gap-3">
-          <router-link to="#" class="hover:text-white">Donate <3</router-link>
-          <router-link to="#" class="hover:text-white">
-            Privacy Policy
-          </router-link>
-          <router-link to="#" class="hover:text-white">
-            Terms of Service
-          </router-link>
+          <router-link to="#">Donate <3</router-link>
+          <router-link to="#">Privacy Policy</router-link>
+          <router-link to="#">Terms of Service</router-link>
         </div>
       </div>
     </div>

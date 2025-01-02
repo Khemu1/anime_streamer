@@ -3,6 +3,7 @@ import { Icon } from "@iconify/vue";
 import { computed, ref } from "vue";
 import { useUserStore } from "@/store/user";
 import { getPrimaryAccentClass } from "@/utils/localSettings";
+import { storeToRefs } from "pinia";
 
 const { containerTitle, icon, videos } = defineProps<{
   containerTitle: string;
@@ -18,7 +19,8 @@ const { containerTitle, icon, videos } = defineProps<{
   }[];
 }>();
 
-const { localSettings } = useUserStore();
+const userStore = useUserStore();
+const { localSettings } = storeToRefs(userStore);
 const showAll = ref(false);
 const displayedVideos = computed(() =>
   showAll.value ? videos : videos.slice(0, 4)
