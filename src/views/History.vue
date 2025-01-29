@@ -64,8 +64,11 @@ const searchText = ref<string>("");
           placeholder="Filter by title"
           name="search"
           id="search"
-          class="w-full sm:w-[200px] bg-lightDark border-borderColor"
-          :class="[`${accent}-border-hover`, `${accent}-ring-focus`]"
+          class="w-full sm:w-[200px] bg-secondaryBg border-borderColor focus-visible:!ring-0"
+          :class="[
+            `${accent}-border-hover`,
+            `${accent}-ring-focus ${accent}-foucs-border`,
+          ]"
           ref="target"
         />
       </div>
@@ -82,7 +85,7 @@ const searchText = ref<string>("");
 
         <VideoBoxSkeleton />
       </section>
-      <div class="flex justify-between mt-5 items-center">
+      <div class="flex justify-between mt-5 items-center flex-wrap gap-4">
         <div class="font-semibold">
           Showing
           <strong>1</strong>
@@ -93,7 +96,7 @@ const searchText = ref<string>("");
           results
         </div>
         <div
-          class="flex items-center justify-between bg-[#0e0e0e] border border-borderColor rounded-md w-[100px] overflow-hidden"
+          class="flex items-center justify-between bg-secondaryBg border border-borderColor rounded-md w-[100px] overflow-hidden"
         >
           <button
             class="h-full transition-all"
@@ -105,11 +108,10 @@ const searchText = ref<string>("");
               icon="ic:baseline-keyboard-arrow-left"
               width="30px"
               height="30px"
-              style="color: #ffffff"
             />
           </button>
 
-          <span class="px-2 text-white">{{ currentPage }}</span>
+          <span class="px-2">{{ currentPage }}</span>
 
           <button
             class="h-full transition-all"
@@ -120,7 +122,6 @@ const searchText = ref<string>("");
               icon="ic:baseline-keyboard-arrow-right"
               width="30px"
               height="30px"
-              style="color: #ffffff"
             />
           </button>
         </div>

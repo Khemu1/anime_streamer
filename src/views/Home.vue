@@ -8,7 +8,6 @@ import { Icon } from "@iconify/vue";
 import { filters } from "@/constants/home";
 
 import { useUserStore } from "@/store/user";
-import { getPrimaryAccentClass } from "@/utils/localSettings";
 import VideoCard from "@/components/home/VideoCard.vue";
 import VideosContainer from "@/components/general/VideosContainer.vue";
 import VideoCardSkeleton from "@/components/home/skeletons/VideoCardSkeleton.vue";
@@ -18,7 +17,7 @@ import VideosContainerSkeleton from "@/components/general/skeletons/VideosContai
 import { storeToRefs } from "pinia";
 
 const userStore = useUserStore();
-const { localSettings } = storeToRefs(userStore);
+const { accent } = storeToRefs(userStore);
 
 const currentFilter = ref("newest");
 const currentPage = ref(1);
@@ -146,7 +145,7 @@ const videos = [
       <SwiperSkeleton />
     </div>
     <div>
-      <CategoriesSwiper />
+      <CategoriesSwiperSkeleton />
     </div>
     <WatchList />
     <div class="flex w-full justify-between text-[12px]">
@@ -156,18 +155,14 @@ const videos = [
         <span
           v-for="(filter, index) in filters"
           :key="index"
-          class="flex justify-center items-center p-1 cursor-pointer px-4"
+          class="flex justify-center items-center p-1 cursor-pointer px-4 font-semibold"
           :class="[
             `${
               index + 1 >= filters.length
                 ? ''
                 : 'border-r-2 border-borderColor '
-            }, ${getPrimaryAccentClass(localSettings.primaryAccent)}-hover`,
-            `${
-              filter.value === currentFilter
-                ? getPrimaryAccentClass(localSettings.primaryAccent)
-                : ''
-            }`,
+            }, ${accent}-hover`,
+            `${filter.value === currentFilter ? accent : ''}`,
           ]"
           @click="
             () => {
@@ -179,7 +174,7 @@ const videos = [
         </span>
       </div>
       <div
-        class="flex items-center justify-between bg-[#0e0e0e] border border-borderColor rounded-md w-[100px] overflow-hidden"
+        class="flex items-center justify-between bg-secondaryBg border border-borderColor rounded-md w-[100px] overflow-hidden"
       >
         <button
           class="h-full transition-all"
@@ -191,11 +186,10 @@ const videos = [
             icon="ic:baseline-keyboard-arrow-left"
             width="30px"
             height="30px"
-            style="color: #ffffff"
           />
         </button>
 
-        <span class="px-2 text-white">{{ currentPage }}</span>
+        <span class="px-2">{{ currentPage }}</span>
 
         <button
           class="h-full transition-all"
@@ -206,7 +200,6 @@ const videos = [
             icon="ic:baseline-keyboard-arrow-right"
             width="30px"
             height="30px"
-            style="color: #ffffff"
           />
         </button>
       </div>

@@ -28,7 +28,7 @@ const isHovered = useElementHover(imageHover);
   >
     <div
       v-if="isHovered"
-      class="absolute right-1 top-1 bg-[#0e0e0e] border border-transparent z-[10] rounded-sm shadow-lg motion-preset-pop hover:border-white hover:text-white transition-all"
+      class="absolute right-1 top-1 bg-[#0e0e0e] border border-transparent z-[10] rounded-sm shadow-lg motion-preset-pop hover:border-white hover:text-white transition-all z-[13]"
     >
       <Icon
         icon="material-symbols:add"
@@ -37,15 +37,21 @@ const isHovered = useElementHover(imageHover);
         style="color: #ffffff"
       />
     </div>
-    <div class="h-[270.5px] rounded-md overflow-hidden flex-shrink-0">
+    <div
+      class="h-[270.5px] rounded-md overflow-hidden flex-shrink-0 relative hover:translate-y-[-5px] duration-300 ease-in-out shadow-xl"
+    >
+      <div
+        v-if="isHovered"
+        class="bg-[#0e0e0e] opacity-70 w-full h-full inset-0 z-[10] absolute"
+      ></div>
       <img
         :src="video.image"
         alt="Video Image"
-        class="w-full h-full object-fill duration-300 rounded-md ease-in-out group-hover:translate-y-[-5px] group-hover:opacity-50"
+        class="w-full h-full object-fill duration-300 rounded-md ease-in-out"
       />
       <Icon
         v-if="isHovered"
-        class="absolute inset-0 m-auto flex items-center justify-center text-white motion-preset-pop"
+        class="absolute inset-0 m-auto flex items-center justify-center text-white motion-preset-pop z-[10]"
         icon="material-symbols:play-arrow-rounded"
         width="50px"
         height="50px"
@@ -58,7 +64,7 @@ const isHovered = useElementHover(imageHover);
       </p>
 
       <div
-        class="flex gap-2 items-center text-[gray] text-sm *:bg-[#5555551a] *:gap-[.15rem] *:py-[.1rem] *:px-[.2rem] font-semibold text-[px] sm:text-[11px] *:rounded-md"
+        class="flex gap-2 items-center text-[gray] text-sm *:bg-[#5555551a] *:gap-[.15rem] *:py-[.1rem] *:px-[.2rem] font-semibold text-[px] sm:text-[11px] *:rounded-md *:shadow-lg"
       >
         <span>{{ video.watchWhere }}</span>
 

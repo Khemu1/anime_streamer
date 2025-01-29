@@ -1,3 +1,4 @@
+import path from "path";
 import { createWebHistory, createRouter } from "vue-router";
 
 const routes = [
@@ -22,6 +23,21 @@ const routes = [
     component: () => import("@/views/Schedule.vue"),
   },
   { path: "/", name: "home", component: () => import("@/views/Home.vue") },
+  {
+    path: "/info",
+    name: "info",
+    component: () => import("@/views/Info.vue"),
+  },
+  {
+    path: "/video",
+    name: "video",
+    component: () => import("@/views/Video.vue"),
+  },
+  {
+    path: "/search",
+    name: "search",
+    component: () => import("@/views/Search.vue"),
+  },
   {
     path: "/:pathMatch(.*)",
     name: "PageNotFound",

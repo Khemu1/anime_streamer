@@ -11,33 +11,27 @@ import { Icon } from "@iconify/vue";
         icon="material-symbols:check-small-rounded"
         width="20px"
         height="20px"
-        style="color: #000; transform: rotate(25deg); font-weight: bold"
+        style="transform: rotate(25deg); font-weight: bold"
       />
     </div>
     <div class="flex justify-center flex-col text-[0.8rem] gap-2">
       <p class="font-semibold text-[1rem]">Demon Loard 2099</p>
       <div class="flex gap-2 font-semibold *:bg-schedule-big-card-tag-bg-color">
         <div
-          class="flex items-center gap-2 text-white text-sm font-semibold border border-borderColor p-[0.2rem] px-[0.5rem] rounded-md"
+          class="flex items-center gap-2 text-sm font-semibold border border-borderColor p-[0.2rem] px-[0.5rem] rounded-md"
         >
           <Icon
             icon="material-symbols:subtitles-rounded"
             width="14px"
             height="14px"
-            style="color: #ffffff"
           />
           <span>EP 11</span>
         </div>
 
         <div
-          class="flex items-center gap-2 bg-black/20 border border-borderColor p-[0.2rem] px-[0.5rem] rounded-md font-semibold w-max text-white text-sm"
+          class="flex items-center gap-2 bg-black/20 border border-borderColor p-[0.2rem] px-[0.5rem] rounded-md font-semibold w-max text-sm"
         >
-          <Icon
-            icon="material-symbols:timer"
-            width="14px"
-            height="14px"
-            style="color: #ffffff"
-          />
+          <Icon icon="material-symbols:timer" width="14px" height="14px" />
           <span>00:00:00 AM</span>
         </div>
       </div>

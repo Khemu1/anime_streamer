@@ -41,7 +41,10 @@ const { localSettings, accent } = storeToRefs(userStore);
           </label>
           <p class="text-sm mb-2 w-[350px] opacity-60">{{ item.desc }}</p>
         </div>
-        <Select class="w-[224px] !border-none" v-model="localSettings[item.id]">
+        <Select
+          class="!w-[224px] !border-none"
+          v-model="localSettings[item.id]"
+        >
           <SelectItem
             v-for="(value, idx) in item.values"
             :key="idx"

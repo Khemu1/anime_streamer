@@ -44,14 +44,12 @@ const enableMouseScroll = () => {
     container.scrollLeft = scrollLeft - walk;
   };
 
-  // Add event listeners
   container.addEventListener("mousedown", mouseDownHandler);
   container.addEventListener("mouseup", mouseUpHandler);
   container.addEventListener("mouseleave", mouseLeaveHandler);
   container.addEventListener("mousemove", mouseMoveHandler);
 
   return () => {
-    // Remove event listeners when component unmounts
     container.removeEventListener("mousedown", mouseDownHandler);
     container.removeEventListener("mouseup", mouseUpHandler);
     container.removeEventListener("mouseleave", mouseLeaveHandler);
@@ -69,7 +67,6 @@ const removeListeners = (cleanup?: () => void) => {
   if (cleanup) cleanup();
 };
 
-// Use Vue lifecycle hooks to add/remove listeners
 let cleanupListeners: (() => void) | undefined;
 onMounted(() => {
   cleanupListeners = addListeners();
@@ -82,9 +79,9 @@ onUnmounted(() => {
 
 <template>
   <div v-if="watchList.length > -1" class="flex flex-col gap-4">
-    <div class="text-gray-400">
-      <p>Your Watchlist</p>
-      <h2 class="text-white text-2xl font-semibold">Continue Watching</h2>
+    <div class="">
+      <p class="opacity-80">Your Watchlist</p>
+      <h2 class="text-2xl font-semibold">Continue Watching</h2>
     </div>
 
     <div
@@ -104,7 +101,7 @@ onUnmounted(() => {
 
       <router-link
         to="/history"
-        class="flex justify-center items-center w-[270px] md:w-[300px] flex-shrink-0 border border-borderColor rounded-md hover:border-white transition-all text-white"
+        class="flex justify-center items-center w-[270px] md:w-[300px] flex-shrink-0 bg-lightDark rounded-md transition-all"
       >
         View More
       </router-link>

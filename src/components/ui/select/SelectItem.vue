@@ -13,7 +13,10 @@ import {
 import { computed, type HTMLAttributes } from "vue";
 
 const props = defineProps<
-  SelectItemProps & { class?: HTMLAttributes["class"] }
+  Omit<SelectItemProps, "value"> & {
+    class?: HTMLAttributes["class"];
+    value: string | number;
+  }
 >();
 
 const delegatedProps = computed(() => {
@@ -29,6 +32,7 @@ const { accent } = storeToRefs(userStore);
 </script>
 
 <template>
+  <!-- @vue-ignore -->
   <SelectItem
     v-bind="forwardedProps"
     :class="

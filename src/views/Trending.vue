@@ -19,7 +19,7 @@ const season = ref("Winter");
 </script>
 
 <template>
-  <div class="flex flex-col flex-1 mt-10">
+  <div class="flex flex-col flex-1 mt-14 sm:mt-14 md:mt-10">
     <header class="flex justify-center">
       <div class="flex overflow-x-scroll scrollbar-hide whitespace-nowrap">
         <div
@@ -29,15 +29,12 @@ const season = ref("Winter");
           @click="season = filter"
         >
           <span
-            :class="season === filter ? 'text-white' : 'text-gray-400'"
+            :class="season === filter ? '' : 'opacity-70'"
             class="transition-colors duration-200 ease-in-out leading-none h-full"
           >
             {{ filter }}
           </span>
-          <span
-            v-if="index !== filters.length - 1"
-            class="mx-2 sm:mx-4 text-white h-full"
-          >
+          <span v-if="index !== filters.length - 1" class="mx-2 sm:mx-4 h-full">
             /
           </span>
         </div>
@@ -55,7 +52,7 @@ const season = ref("Winter");
 
       <TrendingBoxSkeleton />
     </section>
-    <div class="flex justify-between mt-5 items-center">
+    <div class="flex justify-between mt-5 items-center flex-wrap gap-4">
       <div class="font-semibold">
         Showing
         <strong>1</strong>
@@ -72,12 +69,20 @@ const season = ref("Winter");
         show-edges
         :default-page="2"
       >
-        <PaginationList v-slot="{ items }" class="flex items-center gap-1">
-          <PaginationFirst />
-          <PaginationPrev />
+        <PaginationList
+          v-slot="{ items }"
+          class="flex items-center gap-1 flex-wrap"
+        >
+          <PaginationFirst
+            class="bg-lightDark border border-borderColor rounded-md"
+          />
+          <PaginationPrev
+            class="bg-lightDark border border-borderColor rounded-md"
+          />
 
           <div v-for="(item, index) in items">
             <PaginationListItem
+              class="bg-lightDark border border-borderColor rounded-md"
               v-if="item.type === 'page'"
               :key="index"
               :value="item.value"
@@ -85,6 +90,7 @@ const season = ref("Winter");
             >
               <Button
                 class="w-10 h-10 p-0"
+                :class="item.value === page ? 'bg-primary' : ''"
                 :variant="item.value === page ? 'default' : 'outline'"
               >
                 {{ item.value }}
@@ -93,8 +99,12 @@ const season = ref("Winter");
             <PaginationEllipsis v-else :key="item.type" :index="index" />
           </div>
 
-          <PaginationNext />
-          <PaginationLast />
+          <PaginationNext
+            class="bg-lightDark border border-borderColor rounded-md"
+          />
+          <PaginationLast
+            class="bg-lightDark border border-borderColor rounded-md"
+          />
         </PaginationList>
       </Pagination>
     </div>

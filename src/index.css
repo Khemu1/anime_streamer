@@ -18,6 +18,7 @@
   --schedule-big-card-tag-bg-color: #0e0e0e;
   --schedule-small-card-bg-color: #0e0e0e;
   --catigories-bg-color: rgb(245, 245, 245, 0.1);
+  --video-page-button-bg-color: #080808;
 }
 
 :root.light-theme {
@@ -36,6 +37,7 @@
   --schedule-big-card-tag-bg-color: rgb(8, 8, 8, 0.1);
   --schedule-small-card-bg-color: #eaeaea;
   --catigories-bg-color: rgb(8, 8, 8, 0.1);
+  --video-page-button-bg-color: #f5f5f5;
 }
 
 * {
@@ -48,7 +50,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: var(--main-bg-color);
-  color: var(--main-text-color);
+  color: var(--main-text-color) !important;
   font-family: "Karla", "Outfit", ui-sans-serif, system-ui, sans-serif,
     Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   font-feature-settings: normal;
@@ -230,6 +232,57 @@ body {
   @apply focus:ring-[var(--hot-pink)] !important;
 }
 
+/* bg hover*/
+
+.miruro-bg-hover {
+  @apply hover:bg-[var(--miruro)] !important;
+}
+
+.tomato-bg-hover {
+  @apply hover:bg-[var(--tomato)] !important;
+}
+
+.royal-blue-bg-hover {
+  @apply hover:bg-[var(--royal-blue)] !important;
+}
+
+.orange-bg-hover {
+  @apply hover:bg-[var(--orange)] !important;
+}
+
+.sea-green-bg-hover {
+  @apply hover:bg-[var(--sea-green)] !important;
+}
+
+.hot-pink-bg-hover {
+  @apply hover:bg-[var(--hot-pink)] !important;
+}
+
+/* foucs border */
+.miruro-foucs-border {
+  @apply focus:border-[var(--miruro)] !important;
+}
+
+.tomato-foucs-border {
+  @apply focus:border-[var(--tomato)] !important;
+}
+
+.royal-blue-foucs-border {
+  @apply focus:border-[var(--royal-blue)] !important;
+}
+
+.orange-foucs-border {
+  @apply focus:border-[var(--orange)] !important;
+}
+
+.sea-green-foucs-border {
+  @apply focus:border-[var(--sea-green)] !important;
+}
+
+.hot-pink-foucs-border {
+  @apply focus:border-[var(--hot-pink)] focus-within:border-[var(--hot-pink)] focus-visible:ring-0 !important;
+}
+
 .borderless-input {
   border: none !important;
   outline: none !important;
@@ -277,11 +330,11 @@ body {
 /* Make scrollbars thin and invisible */
 
 .aside-dock {
-  @apply flex bg-[#060707] border-t border-borderColor items-center fixed bottom-0 justify-center w-full overflow-hidden z-50;
+  @apply flex bg-secondaryBg border-t border-borderColor items-center fixed bottom-0 justify-center w-full overflow-hidden z-50;
 }
 
 .aside-float {
-  @apply w-[95%] flex bg-black/60 border-t border-borderColor items-center fixed bottom-3 rounded-3xl justify-center overflow-hidden z-50  shadow-lg py-1;
+  @apply w-[95%] flex bg-lightDark border-t border-borderColor items-center fixed bottom-3 rounded-3xl justify-center overflow-hidden z-50  shadow-lg py-1;
   backdrop-filter: blur(10px);
   left: 50%;
   transform: translateX(-50%);
@@ -317,4 +370,65 @@ body {
 .swiper-button-disabled {
   opacity: 0.5;
   pointer-events: none;
+}
+
+.multi-select {
+  display: inline-block;
+  position: relative;
+  width: 200px;
+}
+
+.dropdown-trigger {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  padding: 0.5rem;
+  border-radius: 7px;
+  cursor: pointer;
+  background-color: var(--secondary-bg-color);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.selected-options {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  font-size: 0.7rem !important;
+  row-gap: 5px;
+}
+.toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.dropdown {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  right: 0;
+  border-radius: 4px;
+  max-height: 200px;
+  padding: 0.5rem;
+  overflow-y: auto;
+  font-size: 0.9rem;
+  z-index: 10;
+  background: var(--secondary-bg-color) !important;
+}
+.dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  padding-block: 0.3rem;
+  padding-inline: 0.5rem;
+  cursor: pointer;
+  border-radius: 0.2rem;
+}
+/* .dropdown-item:hover {
+  background: var(--lightdark-color);
+} */
+.dropdown-item.selected {
+  font-weight: bold;
+  background: var(--secondary-bg-color);
 }

@@ -5,6 +5,7 @@ import { useUserStore } from "@/store/user";
 import { getPrimaryAccentClass } from "@/utils/localSettings";
 import { storeToRefs } from "pinia";
 
+
 const { containerTitle, icon, videos } = defineProps<{
   containerTitle: string;
   icon: string;
@@ -35,17 +36,17 @@ const toggleShowAll = () => {
 
 <template>
   <div
-    class="w-full xl:w-[400px] max-h-[625px] overflow-y-scroll flex flex-col p-[0.75rem] bg-secondaryBg rounded-md gap-4"
+    class="w-full xl:w-[400px] max-h-[625px] overflow-y-hidden flex flex-col p-[0.75rem] bg-lightDark rounded-md gap-4"
   >
     <div class="flex gap-2 items-center">
-      <Icon :icon="icon" width="20px" height="20px" style="color: #ffffff" />
+      <Icon :icon="icon" width="20px" height="20px" />
       <h2 class="font-semibold text-xl">{{ containerTitle }}</h2>
     </div>
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-4 overflow-y-scroll py-2 scrollbar-hide">
       <div
         v-for="video in displayedVideos"
         :key="video.id"
-        class="flex gap-4 bg-[#141414] rounded-md transition-all hover:ml-2 cursor-pointer"
+        class="flex gap-4 bg-secondaryBg rounded-md transition-all hover:ml-2 cursor-pointer"
       >
         <div class="w-[68px] h-[96px] rounded-md overflow-hidden flex-shrink-0">
           <img
@@ -89,7 +90,7 @@ const toggleShowAll = () => {
     </div>
     <button
       @click="toggleShowAll"
-      class="flex justify-center bg-[#141414] text-white font-semibold py-2 px-4 rounded-md mt-2 hover:bg-primaryHover active:scale-95 transition-all hover:bg-[#1b1b1b]"
+      class="flex justify-center bg-secondaryBg font-semibold py-2 px-4 rounded-md mt-2 active:scale-95 transition-all hover:opacity-80"
       v-if="!showAll"
       :class="[`${getPrimaryAccentClass(localSettings.primaryAccent)}-hover`]"
     >

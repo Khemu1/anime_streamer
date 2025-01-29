@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
 import { useFocus } from "@vueuse/core";
 
 import { Input } from "@/components/ui/input";
@@ -18,10 +18,10 @@ import { storeToRefs } from "pinia";
 
 const searchText = ref<string>("");
 const userStore = useUserStore();
-const { localSettings, theme } = storeToRefs(userStore);
+const { theme } = storeToRefs(userStore);
 const target = ref();
 const { focused } = useFocus(target);
-const iconsColor = computed(() => theme.value === "dark" ? "white" : "black");
+const iconsColor = computed(() => (theme.value === "dark" ? "white" : "black"));
 const isSearchOpen = ref(false);
 
 const handleSearchBarToggle = () => {
@@ -43,24 +43,23 @@ const handleThemeToggle = () => {
     }
   }, 100);
 };
-
-
 </script>
 
 <template>
   <nav
     class="fixed z-[100] top-0 flex flex-col gap-3 sm:flex-row w-full p-2.5 md:bg-secondaryBg sm:border-b border-borderColor shadow-lg sm:shadow-none items-center justify-between px-2"
-    :class="[
-      localSettings.defaultTheme === 'dark' ? 'bg-[#060707]' : 'bg-white',
-    ]"
+    :class="[theme === 'dark' ? 'bg-[#060707]' : 'bg-white']"
   >
     <div class="w-full flex items-center justify-between">
-      <router-link to="/" class="flex items-center font-extrabold uppercase">
+      <router-link
+        to="/"
+        class="flex items-center font-extrabold uppercase mr-2"
+      >
         AnimeVault
       </router-link>
 
       <!-- large screen Search Form -->
-      <form action="POST" class="sm:flex gap-2 hidden w-max h-max">
+      <form action="POST" class="sm:flex gap-2 hidden w-max h-max mr-2">
         <div
           class="flex items-center bg-lightDark border border-borderColor px-2 rounded-sm"
         >
@@ -71,9 +70,7 @@ const handleThemeToggle = () => {
             :class="[
               'transition-all',
               `text-${iconsColor}`,
-              localSettings.defaultTheme === 'dark'
-                ? 'text-white'
-                : 'text-black',
+              theme === 'dark' ? 'text-white' : 'text-black',
               focused ? 'opacity-100' : 'opacity-50',
             ]"
           />
@@ -92,9 +89,7 @@ const handleThemeToggle = () => {
             :class="[
               'transition-all',
               `text-${iconsColor}`,
-              localSettings.defaultTheme === 'dark'
-                ? 'text-white'
-                : 'text-black',
+              theme === 'dark' ? 'text-white' : 'text-black',
               focused ? 'opacity-100' : 'opacity-50',
             ]"
           />
@@ -127,7 +122,12 @@ const handleThemeToggle = () => {
           class="flex sm:hidden bg-lightDark hover:bg-lightDark border border-borderColor h-full !rounded-none w-max"
           @click="handleSearchBarToggle"
         >
-          <Icon icon="simple-line-icons:magnifier" width="15px" height="15px" />
+          <Icon
+            icon="simple-line-icons:magnifier"
+            width="15px"
+            height="15px"
+            :style="{ color: iconsColor }"
+          />
         </Button>
         <Button
           class="flex bg-lightDark hover:bg-lightDark border border-borderColor h-full rounded-sm w-max"
@@ -135,9 +135,7 @@ const handleThemeToggle = () => {
         >
           <Icon
             :icon="
-              localSettings.defaultTheme === 'dark'
-                ? 'solar:sun-2-bold-duotone'
-                : 'solar:moon-bold'
+              theme === 'dark' ? 'solar:sun-2-bold-duotone' : 'solar:moon-bold'
             "
             width="15px"
             height="15px"
@@ -156,7 +154,9 @@ const handleThemeToggle = () => {
               :style="{ color: iconsColor }"
             />
           </DropdownMenuTrigger>
-          <DropdownMenuContent class="border-borderColor rounded-sm">
+          <DropdownMenuContent
+            class="bg-lightDark border-borderColor rounded-sm"
+          >
             <DropdownMenuItem>
               <router-link to="/profile" class="flex items-center gap-2 w-full">
                 <Icon
@@ -179,7 +179,7 @@ const handleThemeToggle = () => {
                   height="20px"
                   :style="{ color: iconsColor }"
                 />
-                <span>Settings</span>
+                <span style="color: unset">Settings</span>
               </router-link>
             </DropdownMenuItem>
           </DropdownMenuContent>

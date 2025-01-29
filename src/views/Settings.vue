@@ -72,7 +72,7 @@ const handleClearWatchList = () => {
 </script>
 
 <template>
-  <main class="flex flex-1 justify-center tw-min-h-screen">
+  <main class="flex flex-1 justify-center tw-min-h-screen mt-14 sm:mt-4">
     <div
       class="flex flex-col gap-5 w-full sm:w-[75%] bg-lightDark rounded-lg sm:my-10 p-5"
     >

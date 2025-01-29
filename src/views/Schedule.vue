@@ -1,14 +1,21 @@
 <script setup lang="ts">
-import { days } from "@/constants/schedule"; // Assumes `days` contains days of the week in order
-import { ref } from "vue";
+import { days } from "@/constants/schedule";
+import BigCardSkeleton from "@/components/schedule/skeletons/BigCardSkeleton.vue";
+import { computed, ref } from "vue";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useUserStore } from "@/store/user";
 import { getPrimaryAccentClass } from "@/utils/localSettings";
 import BigCard from "@/components/schedule/BigCard.vue";
 import SmallCard from "@/components/schedule/SmallCard.vue";
 import { storeToRefs } from "pinia";
+import SmallCardSkeleton from "@/components/schedule/skeletons/SmallCardSkeleton.vue";
 
 const userStore = useUserStore();
-const { localSettings } = storeToRefs(userStore);
+const { localSettings, theme } = storeToRefs(userStore);
+
+const themeClass = computed(() => {
+  return theme.value === "dark" ? "dark" : "light";
+});
 
 const schedules = [
   {
@@ -132,7 +139,7 @@ const updateSelectedDate = (dayValue: number) => {
     <div
       class="flex w-full justify-around flex-col xl:flex-row flex-wrap gap-4"
     >
-      <BigCard />
+      <BigCardSkeleton />
       <BigCard />
 
       <BigCard />
@@ -143,7 +150,7 @@ const updateSelectedDate = (dayValue: number) => {
       <span
         v-for="(day, index) in days"
         :key="index"
-        class="flex justify-center p-2 cursor-pointer px-4"
+        class="flex justify-center p-2 cursor-pointer px-4 font-semibold"
         :class="[
           `${
             index + 1 >= days.length ? '' : 'border-r-2 border-borderColor '
@@ -189,7 +196,11 @@ const updateSelectedDate = (dayValue: number) => {
               class="airing-time font-semibold flex items-center gap-2 text-[1rem]"
             >
               <span class="status-indicator"></span>
-              {{ schedule.airTime }}
+              <!-- {{ schedule.airTime }} -->
+              <Skeleton
+                class="w-[50px] h-4"
+                :class="themeClass === 'light' ? 'bg-black/20' : ''"
+              />
             </div>
 
             <div class="flex gap-4 ml-[1.8px] w-full">
@@ -198,7 +209,7 @@ const updateSelectedDate = (dayValue: number) => {
               ></div>
               <div class="flex flex-wrap gap-4 w-full">
                 <div v-for="(item, index) in schedule.episodes" :key="index">
-                  <SmallCard
+                  <SmallCardSkeleton
                     :episode="{ ...item, airedTime: schedule.airTime }"
                     class=""
                   />

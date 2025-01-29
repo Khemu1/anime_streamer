@@ -51,6 +51,7 @@ module.exports = {
           "var(--schedule-big-card-tag-bg-color)",
         "schedule-small-card-bg-color": "var(--schedule-small-card-bg-color)",
         "catigories-bg-color": "var(--catigories-bg-color)",
+        "video-page-button-bg-color": "var(--video-page-button-bg-color)",
 
         primary: {
           DEFAULT: "hsl(var(--primary))",
